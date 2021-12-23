@@ -962,6 +962,10 @@ select {
   margin-left: 3rem;
   margin-right: 3rem;
 }
+.my-10 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
 .ml-3 {
   margin-left: 0.75rem;
 }
@@ -1375,6 +1379,12 @@ select {
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
 }
+.bg-\[url\(\'https\:\/\/www\.nawpic\.com\/media\/2020\/mountain-nawpic-5\.jpg\'\)\] {
+  background-image: url('https://www.nawpic.com/media/2020/mountain-nawpic-5.jpg');
+}
+.bg-\[url\(\'\/images\/mountain\.jpg\'\)\] {
+  background-image: url('/images/mountain.jpg');
+}
 .bg-cover {
   background-size: cover;
 }
@@ -1453,6 +1463,10 @@ select {
 .px-8 {
   padding-left: 2rem;
   padding-right: 2rem;
+}
+.px-12 {
+  padding-left: 3rem;
+  padding-right: 3rem;
 }
 .pt-6 {
   padding-top: 1.5rem;
