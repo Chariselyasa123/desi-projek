@@ -1731,6 +1731,34 @@ select {
 .ease-in {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
+.bounce-right {
+    -webkit-animation: bounce 1s infinite;
+            animation: bounce 1s infinite;
+}
+@-webkit-keyframes bounce {
+    0%, 100% {
+        transform: translatex(25%);
+        -webkit-animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+        transform: translatex(0);
+        -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+}
+@keyframes bounce {
+    0%, 100% {
+        transform: translatex(25%);
+        -webkit-animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+        transform: translatex(0);
+        -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+}
 .hover\:border-gray-300:hover {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
