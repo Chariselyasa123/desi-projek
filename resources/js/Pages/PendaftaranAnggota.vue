@@ -1,32 +1,5 @@
 <template>
-    <Head title="Welcome"/>
-    <div class="bg-[url('/images/mountain.jpg')]">
-        <!-- Landing page header -->
-        <div class="flex flex-wrap py-6 px-12 justify-between sticky top-0">
-            <div class="flex gap-8 items-center">
-                <Link href="#" class="uppercase text-2xl font-bold">
-                    <img src="/images/logo-ripala.png" alt="Logo" class="h-32 w-48"/>
-                </Link>
-                <Link href="#"
-                      class="font-bold text-2xl hover:border-b-4 hover:border-gray-900 focus:border-white">Home
-                </Link>
-                <Link href="#" class="font-bold text-2xl hover:border-b-4 hover:border-gray-900 focus:border-white">
-                    Artikel
-                </Link>
-                <Link :href="route('pendaftaran-anggota')"
-                      class="font-bold text-2xl hover:border-b-4 hover:border-gray-900 focus:border-white">
-                    Member registration
-                </Link>
-            </div>
-            <div class="flex gap-8 items-center">
-                <Link href="#" class="font-bold text-xl hover:border-b-4 hover:border-gray-900 focus:border-white">About
-                    us
-                </Link>
-                <Link href="#" class="font-bold text-xl hover:border-b-4 hover:border-gray-900 focus:border-white">
-                    Contact
-                </Link>
-            </div>
-        </div>
+    <page-layout title="Pendaftaran Anggota">
 
         <!-- Landing page content -->
         <!-- Make content center div -->
@@ -43,73 +16,165 @@
                             Silahkan isi formulir pendaftaran anggota di bawah ini.
                         </p>
                     </div>
+                    <hr class="solid">
                     <div class="mb-4">
                         <div class="grid grid-cols-2 gap-8 place-content-center">
-                            <div>
-                                asdasasdhagwugayowi awgd uagf oisgfoih sgdfhi bsughb sihbg shoidbg oihsbdgoih sbgfoi
-                                sgoi bsoig shg shgb shhb
+                            <div class="max-w-md">
+                                <p>Persyaratan :</p>
+                                <ol class="list-decimal list-inside tracking-wide leading-10">
+                                    <li class="my-4">Mahasiswa yang terdaftar dan aktif kuliah pada Universitas
+                                        Raharja.
+                                    </li>
+                                    <li class="my-4">Maksimal smester V (lima) dalam perkuliahan.</li>
+                                    <li class="my-4">Memiliki kemampuan belajar dalam kegiatan alam bebas.</li>
+                                </ol>
+                                <hr class="solid">
+                                <p class="mb-4">Catatan :</p>
+                                <p>Bagi yang sudah mendaftarkan diri. Mohon menunggu untuk mendapatkan informasi
+                                    selanjutnya terkait informasi pendaftaran calon anggota UKM <span class="font-bold">RIPALA</span>
+                                </p>
                             </div>
-                            <form action="">
+                            <form @submit.prevent="submit" class="max-w-md">
                                 <div>
                                     <jet-label for="name" value="Nama"/>
                                     <jet-input id="name" type="text" class="mt-1 block w-full"
+                                               placeholder="Nama Calon Anggota" v-model="form.name"
                                                required/>
+                                    <jet-input-error :message="form.errors.name" class="mt-2"/>
                                 </div>
                                 <div class="mt-4">
                                     <jet-label for="fakultas" value="Fakultas"/>
-                                    <jet-input id="fakultas" type="text" class="mt-1 block w-full"
-                                               required/>
+                                    <select id="fakultas" v-model="form.fakultas"
+                                            class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full">
+                                        <option value="" disabled selected>- Pilih Fakultas -</option>
+                                        <option v-for="item in fakultas" :value="item.id">
+                                            {{ item.nama_fakultas }}
+                                        </option>
+                                    </select>
+                                    <jet-input-error :message="form.errors.fakultas" class="mt-2"/>
                                 </div>
                                 <div class="mt-4">
-                                    <jet-label for="ttl" value="Tempat, Tnggal Lahir"/>
-                                    <jet-input id="ttl" type="text" class="mt-1 block w-full"
-                                               required/>
+                                    <jet-label for="semester" value="Semester"/>
+                                    <select id="semester" v-model="form.semester"
+                                            class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full">
+                                        <option value="" disabled selected>- Pilih Semester -</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                    <jet-input-error :message="form.errors.semester" class="mt-2"/>
                                 </div>
                                 <div class="mt-4">
-                                    <jet-label for="alamat" value="Alamat"/>
-                                    <jet-input id="alamat" type="text" class="mt-1 block w-full"
+                                    <jet-label for="tempat" value="Tempat Lahir"/>
+                                    <jet-input id="tempat" type="text" class="mt-1 block w-full" v-model="form.tempat"
+                                               placeholder="Tempat Lahir" required/>
+                                    <jet-input-error :message="form.errors.tempat" class="mt-2"/>
+                                </div>
+                                <div class="mt-4">
+                                    <jet-label for="birthday" value="Tanggal Lahir"/>
+                                    <jet-input id="birthday" type="date" class="mt-1 block w-full"
+                                               v-model="form.birthday"
                                                required/>
+                                    <jet-input-error :message="form.errors.birthday" class="mt-2"/>
+                                </div>
+                                <div class="mt-4">
+                                    <jet-label for="address" value="Alamat"/>
+                                    <jet-input id="address" type="text" class="mt-1 block w-full" v-model="form.address"
+                                               placeholder="Alamat anggota" required/>
+                                    <jet-input-error :message="form.errors.address" class="mt-2"/>
                                 </div>
                                 <div class="mt-4">
                                     <jet-label for="no" value="Nomor Hp"/>
-                                    <jet-input id="no" type="number" class="mt-1 block w-full"
-                                               required/>
+                                    <jet-input id="no" type="number" class="mt-1 block w-full" v-model="form.phone"
+                                               placeholder="08216354648" required/>
+                                    <jet-input-error :message="form.errors.phone" class="mt-2"/>
                                 </div>
                                 <div class="mt-4">
                                     <jet-label for="email" value="E-mail"/>
-                                    <jet-input id="email" type="email" class="mt-1 block w-full"
+                                    <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email"
+                                               placeholder="member@gmail.com"
                                                required/>
+                                    <jet-input-error :message="form.errors.email" class="mt-2"/>
                                 </div>
-                                <div class="mt-4">
-                                    <jet-label for="alamat" value="Alamat"/>
-                                    <jet-input id="alamat" type="text" class="mt-1 block w-full"
-                                               required/>
-                                </div>
+                                <jet-button class="mt-4" :class="{ 'opacity-25': form.processing }"
+                                            :disabled="form.processing">
+                                    Daftar Calon Anggota
+                                </jet-button>
+                                <jet-input-error :message="form.errors.processing" class="mt-2"/>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
+    </page-layout>
 </template>
 
 <script>
 import {defineComponent} from 'vue'
-import {Head, Link} from '@inertiajs/inertia-vue3';
+import PageLayout from "@/Pages/Component/PageLayout";
 import JetButton from "@/Jetstream/Button";
 import JetInput from "@/Jetstream/Input";
+import JetInputError from '@/Jetstream/InputError.vue'
 import JetCheckbox from "@/Jetstream/Checkbox";
 import JetLabel from "@/Jetstream/Label";
 
 export default defineComponent({
+
+    props: ['fakultas'],
+
     components: {
-        Head,
-        Link,
+        PageLayout,
         JetButton,
         JetInput,
+        JetInputError,
         JetCheckbox,
         JetLabel,
+    },
+
+    data() {
+        return {
+            form: this.$inertia.form({
+                name: '',
+                fakultas: '',
+                semester: '',
+                tempat: '',
+                birthday: '',
+                address: '',
+                phone: '',
+                email: '',
+            })
+        }
+    },
+
+    methods: {
+        submit() {
+            this.form
+                .post(this.route('pendaftaran-anggota.store'), {
+                    onSuccess: () => {
+                        this.successAlert()
+                        this.form.reset()
+                    },
+                })
+        },
+        successAlert() {
+            this.$swal.mixin({
+                toast: true,
+                icon: 'success',
+                title: 'General Title',
+                animation: false,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+            }).fire({
+                animation: true,
+                title: 'Berhasil Mendaftarkan Anggota'
+            });
+        },
     },
 })
 </script>

@@ -16,3 +16,22 @@
         animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
     }
 }
+
+hr.solid {
+    border-top: 1px solid #bbb;
+    margin: 0.2rem 0.2rem
+}
+
+.navbar-fixed-top {
+    @apply flex flex-wrap py-6 px-12 justify-between sticky top-0
+}
+
+.navbar-fixed-top.scrolled {
+    background-color: #fff !important;
+    transition: background-color 200ms linear;
+}
+
+.ck-editor__editable {
+    min-height: 500px;
+    max-height: 600px;
+}

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\MembersController;
+use App\Http\Controllers\PostsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -22,12 +24,16 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion'     => PHP_VERSION,
     ]);
+})->name('welcome');
+
+Route::get('pendaftaran-anggota', [MembersController::class, 'index'])->name('pendaftaran-anggota');
+Route::post('pendaftaran-anggota', [MembersController::class, 'store'])->name('pendaftaran-anggota.store');
+
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+
+    Route::get('artikel', [PostsController::class, 'index'])->name('artikel');
+    Route::post('artikel', [PostsController::class, 'store'])->name('artikel.store');
 });
-
-Route::get('/pendaftaran-anggota', function () {
-    return Inertia::render('PendaftaranAnggota');
-})->name('pendaftaran-anggota');
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
