@@ -35,3 +35,7 @@ hr.solid {
     min-height: 500px;
     max-height: 600px;
 }
+
+.header-table {
+    @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider
+}

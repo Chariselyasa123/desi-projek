@@ -10,7 +10,9 @@ class PostsController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Post/Artikle');
+        return Inertia::render('Post/Artikle', [
+            'posts' => Post::with('user')->get()
+        ]);
     }
 
     public function create()
@@ -20,7 +22,18 @@ class PostsController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+        $request->validate([
+            'postTitle'   => 'required|string|max:255',
+            'postContent' => 'required',
+        ]);
+
+        Post::create([
+            'user_id'      => auth()->id(),
+            'post_title'   => $request->postTitle,
+            'post_content' => $request->postContent,
+        ]);
+
+        return redirect()->route('artikel');
     }
 
     public function show(Post $post)
