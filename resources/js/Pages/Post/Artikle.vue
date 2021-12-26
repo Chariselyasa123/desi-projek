@@ -1,13 +1,20 @@
 <template>
     <app-layout title="Artikel">
-        <!-- Make Artikel -->
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <!-- Card -->
                 <div class="bg-white overflow-hidden shadow rounded-lg">
-                    <div class="px-4 py-5 border-b-4 border-gray-200 sm:px-6">
+                    <div class="px-4 py-5 border-b-4 border-gray-200 sm:px-6 flex justify-between">
                         <span class="text-2xl font-bold">Artikel</span>
-
+                        <Link :href="route('artikel.create')"
+                              class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
+                            New Atikel
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24"
+                                 stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </Link>
                     </div>
                     <!-- Card Body -->
                     <div class="px-4 py-5 sm:p-0 mt-2">
@@ -55,7 +62,8 @@
                                                     {{ dateFormat(post.created_at) }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                    <button class="text-indigo-600 hover:text-indigo-900">
+                                                    <button class="text-indigo-600 hover:text-indigo-900"
+                                                            @click="editArtikel(post.id)">
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
                                                              viewBox="0 0 20 20"
                                                              fill="currentColor">
@@ -66,12 +74,13 @@
                                                                   clip-rule="evenodd"/>
                                                         </svg>
                                                     </button>
-                                                    <button type="button" class="text-red-600 hover:text-red-900">
+                                                    <button type="button" class="text-red-600 hover:text-red-900"
+                                                            @click="deleteArtikel(post.id)">
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
                                                              fill="none"
                                                              viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
-                                                                  stroke-width="2"
+                                                                  stroke-width="2" g
                                                                   d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                                         </svg>
                                                     </button>
@@ -96,6 +105,7 @@
 import {defineComponent} from 'vue'
 import AppLayout from '@/Layouts/AppLayout.vue'
 import JetButton from '@/Jetstream/Button.vue'
+import {Link} from '@inertiajs/inertia-vue3';
 
 export default defineComponent({
 
@@ -103,7 +113,8 @@ export default defineComponent({
 
     components: {
         AppLayout,
-        JetButton
+        JetButton,
+        Link
     },
 
     methods: {
@@ -123,7 +134,36 @@ export default defineComponent({
             const minutes = date.getMinutes();
 
             return day + ' ' + monthNames[monthIndex] + ' ' + year + ' ' + hours + ':' + minutes;
+        },
+
+        editArtikel(id) {
+            this.$inertia.get(this.route('artikel.edit', {id}))
+        },
+
+        delete(id) {
+            this.$inertia.delete(this.route('artikel.delete', {id}))
+        },
+
+        deleteArtikel(id) {
+            this.$swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.delete(id);
+                    this.$swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                }
+            })
         }
-    }
+    },
 })
 </script>

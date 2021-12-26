@@ -11,6 +11,7 @@ class CreateMembersTable extends Migration
         Schema::create('members', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('faculty_id');
+            $table->unsignedBigInteger('program_id');
 
             $table->string('name', 50);
             $table->tinyInteger('semester');
@@ -19,10 +20,12 @@ class CreateMembersTable extends Migration
             $table->mediumText('address');
             $table->string('phone', 15);
             $table->string('email', 50);
-            
+            $table->string('status', 30)->default('caang');
+
             $table->timestamps();
 
             $table->foreign('faculty_id')->references('id')->on('faculties')->onDelete('cascade');
+            $table->foreign('program_id')->references('id')->on('programs');
         });
     }
 

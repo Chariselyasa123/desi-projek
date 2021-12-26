@@ -30,6 +30,8 @@
     "dependencies": {
         "@ckeditor/ckeditor5-build-classic": "^31.1.0",
         "@ckeditor/ckeditor5-vue": "^2.0.1",
-        "vue-sweetalert2": "^5.0.2"
+        "ckeditor5-custom-build": "file:ckeditor5",
+        "vue-sweetalert2": "^5.0.2",
+        "vue-upload-drop-images": "^1.0.7"
     }
 }

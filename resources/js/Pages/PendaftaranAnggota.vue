@@ -25,7 +25,8 @@
                                     <li class="my-4">Mahasiswa yang terdaftar dan aktif kuliah pada Universitas
                                         Raharja.
                                     </li>
-                                    <li class="my-4">Maksimal smester V (lima) dalam perkuliahan.</li>
+                                    <li class="my-4">Sehat jasmani dan rohani.</li>
+                                    <li class="my-4">Maksimal smester 3 (tiga) dalam perkuliahan.</li>
                                     <li class="my-4">Memiliki kemampuan belajar dalam kegiatan alam bebas.</li>
                                 </ol>
                                 <hr class="solid">
@@ -44,7 +45,7 @@
                                 </div>
                                 <div class="mt-4">
                                     <jet-label for="fakultas" value="Fakultas"/>
-                                    <select id="fakultas" v-model="form.fakultas"
+                                    <select id="fakultas" v-model="form.fakultas" ref="fakultas"
                                             class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full">
                                         <option value="" disabled selected>- Pilih Fakultas -</option>
                                         <option v-for="item in fakultas" :value="item.id">
@@ -54,6 +55,14 @@
                                     <jet-input-error :message="form.errors.fakultas" class="mt-2"/>
                                 </div>
                                 <div class="mt-4">
+                                    <jet-label for="jurusan" value="Jurusan"/>
+                                    <select id="jurusan" v-model="form.jurusan" ref="jurusan"
+                                            class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full">
+                                        <option value="" disabled selected>- Pilih Jurusan -</option>
+                                    </select>
+                                    <jet-input-error :message="form.errors.jurusan" class="mt-2"/>
+                                </div>
+                                <div class="mt-4">
                                     <jet-label for="semester" value="Semester"/>
                                     <select id="semester" v-model="form.semester"
                                             class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full">
@@ -61,8 +70,6 @@
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
                                     </select>
                                     <jet-input-error :message="form.errors.semester" class="mt-2"/>
                                 </div>
@@ -140,6 +147,7 @@ export default defineComponent({
             form: this.$inertia.form({
                 name: '',
                 fakultas: '',
+                jurusan: '',
                 semester: '',
                 tempat: '',
                 birthday: '',
@@ -160,6 +168,7 @@ export default defineComponent({
                     },
                 })
         },
+
         successAlert() {
             this.$swal.mixin({
                 toast: true,
@@ -175,6 +184,24 @@ export default defineComponent({
                 title: 'Berhasil Mendaftarkan Anggota'
             });
         },
+
+        jurusan() {
+            const that = this;
+            this.$refs.fakultas.addEventListener('change', (e) => {
+                that.fakultas[e.target.value - 1].programs.map(program => {
+                    const option = document.createElement('option');
+                    option.value = program.id;
+                    option.innerText = `${program.nama_prodi} - ${program.jenjang.toUpperCase()}`;
+
+                    // Append element to jurusan refs
+                    that.$refs.jurusan.appendChild(option);
+                })
+            })
+        }
     },
+
+    mounted() {
+        this.jurusan();
+    }
 })
 </script>

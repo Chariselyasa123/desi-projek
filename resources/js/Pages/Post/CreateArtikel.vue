@@ -2,25 +2,29 @@
     <app-layout title="Membuat Artikel">
 
         <!-- Make Artikel -->
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="py-12 grid grid-cols-5 gap-4">
+
+            <div class="max-w-7xl sm:px-6 lg:px-8 col-span-3 col-start-2">
                 <!-- Card -->
                 <div class="bg-white overflow-hidden shadow rounded-lg">
                     <!-- Card Header -->
                     <div class="px-4 py-5 border-b-4 border-gray-200 sm:px-6 flex items-center">
                         <span class="font-bold text-2xl w-auto mr-5">Title </span>
-                        <jet-input type="text" class="w-full" id="title" v-model="form.postTitle" placeholder="Title"/>
+                        <jet-input type="text" class="w-full" id="title" v-model="form.postTitle" placeholder="Title"
+                                   @change="createSlug($event.target.value)"/>
                         <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
                                     @click.prevent="posting">Posting
                         </jet-button>
                     </div>
                     <!-- Card Body -->
-                    <div class="px-4 py-5 sm:p-0 mt-2">
+                    <div>
                         <ckeditor :editor="editor" v-model="form.postContent" :config="editorConfig"></ckeditor>
                     </div>
                 </div>
-
             </div>
+
+            <options @alert="runAlert" @updateImage="onImageUpload" @updateCategories="categoriesSelected"
+                     :categories="categories" :postSlug="form.postSlug"/>
         </div>
 
     </app-layout>
@@ -34,14 +38,19 @@ import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Options from "@/Pages/Post/Partials/Options";
+import axios from 'axios'
 
 export default defineComponent({
+    props: ['categories'],
+
     components: {
         AppLayout,
         JetButton,
         JetInput,
         JetLabel,
         ckeditor: CKEditor.component,
+        Options,
     },
 
     data() {
@@ -50,10 +59,18 @@ export default defineComponent({
             form: this.$inertia.form({
                 postTitle: '',
                 postContent: '',
+                postSlug: '',
+                postImage: '',
+                postCategories: [],
             }),
             editorConfig: {
-                // config
-            }
+                ckfinder: {
+                    uploadUrl: `${this.route('upload.image')}?_token=${document.querySelector('meta[name="csrf-token"]').getAttribute('content')}`,
+                }
+            },
+            postSlug: '',
+            image: null,
+            selectedCategories: [],
         };
     },
 
@@ -82,7 +99,7 @@ export default defineComponent({
                 timerProgressBar: true,
             }).fire({
                 animation: true,
-                title: 'Berhasil Menambahkan Artikel'
+                title: this.$page.props.flash.message
             });
         },
 
@@ -102,7 +119,29 @@ export default defineComponent({
                 title: Object.values(that.form.errors).map(value => `<ul class="list-disc"><li class="text-red-600">${value}</li></ul>`).join('\n'),
             });
 
-        }
-    }
+        },
+
+        runAlert() {
+            this.successAlert();
+        },
+
+        createSlug(title) {
+            axios.get(this.route('artikel.createSlug'), {
+                params: {
+                    title: title
+                }
+            }).then(response => {
+                this.form.postSlug = response.data.slug
+            })
+        },
+
+        onImageUpload(file) {
+            this.form.postImage = file;
+        },
+
+        categoriesSelected(selectedCategories) {
+            this.form.postCategories = selectedCategories;
+        },
+    },
 })
 </script>

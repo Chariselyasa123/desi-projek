@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Faculty;
 use App\Models\Member;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -12,7 +13,7 @@ class MembersController extends Controller
     public function index(): \Inertia\Response
     {
         return Inertia::render('PendaftaranAnggota', [
-            'fakultas' => Faculty::all(),
+            'fakultas' => Faculty::with('programs')->get(),
         ]);
     }
 
@@ -26,6 +27,7 @@ class MembersController extends Controller
         $request->validate([
             'name'     => 'required|string|max:50|regex:/^[a-zA-Z ]+$/',
             'fakultas' => 'required|numeric|exists:faculties,id|not_in:0|not_in:null',
+            'jurusan'  => 'required|numeric|exists:programs,id|not_in:0|not_in:null',
             'semester' => 'required|numeric|in:1,2,3,4,5',
             'tempat'   => 'required|string|max:50|regex:/^[a-zA-Z ]+$/',
             'birthday' => 'required|date|before:today|after:1990-01-01',
@@ -38,6 +40,7 @@ class MembersController extends Controller
         Member::create([
             'name'         => $request->name,
             'faculty_id'   => $request->fakultas,
+            'program_id'   => $request->jurusan,
             'semester'     => $request->semester,
             'tempat_lahir' => $request->tempat,
             'birthday'     => $request->birthday,
@@ -46,12 +49,25 @@ class MembersController extends Controller
             'email'        => $request->email,
         ]);
 
-        return redirect()->route('pendaftaran-anggota')->with('success', 'Data berhasil ditambahkan');
+        return redirect()->route('pendaftaran-anggota')->with('message', 'Berhasi Mendaftarkan Anggota');
     }
 
     public function show(Member $member)
     {
-        //
+        return Inertia::render('Anggota/InformasiAnggota', [
+            'members' => $member->with('faculty', 'program')->get()->map(function ($data) {
+                return [
+                    'name'      => $data->name,
+                    'fakultas'  => $data->faculty->nama_fakultas,
+                    'jurusan'   => $data->program->nama_prodi,
+                    'jenjang'   => $data->program->jenjang,
+                    'semester'  => $data->semester,
+                    'tglDaftar' => $data->created_at->format('d M Y'),
+                    'usia'      => Carbon::parse($data->birthday)->age,
+                    'status'    => $data->status,
+                ];
+            }),
+        ]);
     }
 
     public function edit(Member $member)
