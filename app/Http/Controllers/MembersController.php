@@ -55,8 +55,9 @@ class MembersController extends Controller
     public function show(Member $member)
     {
         return Inertia::render('Anggota/InformasiAnggota', [
-            'members' => $member->with('faculty', 'program')->get()->map(function ($data) {
+            'members' => $member->with('faculty', 'program')->paginate(10)->through(function ($data) {
                 return [
+                    'id'        => $data->id,
                     'name'      => $data->name,
                     'fakultas'  => $data->faculty->nama_fakultas,
                     'jurusan'   => $data->program->nama_prodi,
@@ -82,6 +83,8 @@ class MembersController extends Controller
 
     public function destroy(Member $member)
     {
-        //
+        $member->delete();
+
+        return redirect()->route('anggota')->with('message', 'Anggota berhasil dihapus');
     }
 }

@@ -2,6 +2,7 @@
     <app-layout title="Informasi Anggota">
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
                 <!-- Card -->
                 <div class="bg-white overflow-hidden shadow rounded-lg">
                     <div class="px-4 py-5 border-b-4 border-gray-200 sm:px-6 flex justify-between">
@@ -47,9 +48,9 @@
                                             </tr>
                                             </thead>
                                             <tbody class="bg-white divide-y divide-gray-200">
-                                            <tr v-for="(member, index) in members">
+                                            <tr v-for="(member, index) in members.data">
                                                 <td class="px-6 py-4 whitespace-nowrap">
-                                                    {{ index + 1 }}
+                                                    {{ (members.current_page - 1) * members.per_page + index + 1 }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     {{ member.name }}
@@ -86,7 +87,9 @@
                                                                   clip-rule="evenodd"/>
                                                         </svg>
                                                     </button>
-                                                    <button type="button" class="text-red-600 hover:text-red-900">
+                                                    <button type="button" class="text-red-600 hover:text-red-900"
+                                                            @click="deleteAnggota(member.id)"
+                                                    >
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
                                                              fill="none"
                                                              viewBox="0 0 24 24" stroke="currentColor">
@@ -107,6 +110,12 @@
                         </div>
                     </div>
                 </div>
+
+                <!--Pagination-->
+                <div class="mt-6">
+                    <pagination :links="members.links"/>
+                </div>
+
             </div>
         </div>
     </app-layout>
@@ -115,6 +124,7 @@
 <script>
 import {defineComponent} from 'vue'
 import AppLayout from '@/Layouts/AppLayout.vue'
+import Pagination from '@/Pages/component/Pagination.vue'
 
 export default defineComponent({
 
@@ -122,6 +132,36 @@ export default defineComponent({
 
     components: {
         AppLayout,
+        Pagination,
     },
+
+    methods: {
+
+        delete(id) {
+            this.$inertia.delete(this.route('anggota.delete', {id}))
+        },
+
+        deleteAnggota(id) {
+            const that = this;
+            this.$swal.fire({
+                title: 'Apakah kamu yakin ingin menghapus anggota?',
+                text: "Anda tidak akan dapat mengembalikan anggota yang terhapus!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    that.delete(id);
+                    that.$swal.fire(
+                        'Terhapus!',
+                        'Anggota telah terhapus.',
+                        'success'
+                    )
+                }
+            })
+        }
+    }
 })
 </script>

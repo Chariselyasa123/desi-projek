@@ -17,8 +17,8 @@ export default defineComponent({
     computed: {
         classes() {
             return this.active
-                ? 'font-bold text-xl border-gray-900 border-b-4 focus:border-white'
-                : 'font-bold text-xl hover:border-b-4 hover:border-gray-900 focus:border-white'
+                ? 'font-bold tracking-wide text-white'
+                : 'font-bold tracking-wide transition-colors duration-200 hover:text-blue-700 focus:text-white'
         }
     }
 })

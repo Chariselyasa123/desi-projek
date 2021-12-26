@@ -48,6 +48,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('post/createSlug', [PostsController::class, 'createSlug'])->name('post.createSlug');
 
     Route::get('anggota', [MembersController::class, 'show'])->name('anggota');
+    Route::delete('anggota/{member}', [MembersController::class, 'destroy'])->name('anggota.delete');
 
     Route::post('upload/image', [ImageUploadController::class, 'imageUploadPost'])->name('upload.image');
 

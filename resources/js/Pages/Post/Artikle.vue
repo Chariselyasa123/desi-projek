@@ -2,6 +2,7 @@
     <app-layout title="Artikel">
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
                 <!-- Card -->
                 <div class="bg-white overflow-hidden shadow rounded-lg">
                     <div class="px-4 py-5 border-b-4 border-gray-200 sm:px-6 flex justify-between">
@@ -48,18 +49,18 @@
                                             </tr>
                                             </thead>
                                             <tbody class="bg-white divide-y divide-gray-200">
-                                            <tr v-for="(post, index) in posts">
+                                            <tr v-for="(post, index) in posts.data">
                                                 <td class="px-6 py-4 whitespace-nowrap">
-                                                    {{ index + 1 }}
+                                                    {{ (posts.current_page - 1) * posts.per_page + index + 1 }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     {{ post.post_title }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
-                                                    {{ post.user.name }}
+                                                    {{ post.author }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                    {{ dateFormat(post.created_at) }}
+                                                    {{ dateFormat(post.post_created) }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                     <button class="text-indigo-600 hover:text-indigo-900"
@@ -96,6 +97,12 @@
                         </div>
                     </div>
                 </div>
+
+                <!--Pagination-->
+                <div class="mt-6">
+                    <pagination :links="posts.links"/>
+                </div>
+
             </div>
         </div>
     </app-layout>
@@ -106,6 +113,7 @@ import {defineComponent} from 'vue'
 import AppLayout from '@/Layouts/AppLayout.vue'
 import JetButton from '@/Jetstream/Button.vue'
 import {Link} from '@inertiajs/inertia-vue3';
+import Pagination from "@/Pages/Component/Pagination";
 
 export default defineComponent({
 
@@ -114,7 +122,8 @@ export default defineComponent({
     components: {
         AppLayout,
         JetButton,
-        Link
+        Link,
+        Pagination,
     },
 
     methods: {

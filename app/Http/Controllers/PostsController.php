@@ -15,7 +15,14 @@ class PostsController extends Controller
     public function index(): \Inertia\Response
     {
         return Inertia::render('Post/Artikle', [
-            'posts' => Post::with('user')->get()
+            'posts' => Post::with('user')->paginate(10)->through(function ($post) {
+                return [
+                    'post_title'   => $post->post_title,
+                    'author'       => $post->user->name,
+                    'post_created' => $post->created_at->format('d-m-Y'),
+                    'slug'         => $post->slug,
+                ];
+            }),
         ]);
     }
 
