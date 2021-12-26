@@ -44,8 +44,8 @@
             <!-- Card featured image -->
             <div class="px-4 py-5 sm:p-0 mt-2 border-b-4 border-gray-200">
                 <div class="m-5">
-                    <span class="text-lg">Featured Image</span>
-                    <div>
+                    <span class="text-lg ">Featured Image :</span>
+                    <div v-if="!image">
                         <upload-images
                             @change="handleImages"
                             :max="5"
@@ -53,6 +53,19 @@
                             uploadMsg="upload featured images"
                             fileError="images files only accepted"
                         />
+                    </div>
+                    <div v-else>
+                        <img :src="image" alt="featured image">
+                        <span class="text-sm text-blue-700 font-bold hover:cursor-pointer hover:underline flex mt-4"
+                              @click="image = false"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                 fill="currentColor">
+                                  <path
+                                      d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                            </svg>
+                            Change Featured Image
+                        </span>
                     </div>
                 </div>
             </div>
@@ -83,18 +96,19 @@ import UploadImages from "vue-upload-drop-images"
 
 export default defineComponent({
 
-    props: ['categories', 'postSlug'],
+    props: ['categories', 'postSlug', 'post'],
 
     emits: ['alert', 'updateImage', 'updateCategories'],
 
     data() {
+        const post = this.post;
         return {
             category: '',
-            slug: '',
+            slug: post !== undefined ? post.slug ?? '' : '',
             inputCategory: false,
             showModal: false,
-            image: '',
-            categorySelected: [],
+            image: post !== undefined ? post.featured_image ?? false : false,
+            categorySelected: post !== undefined ? post.categories.map(v => v.id) ?? [] : [],
         }
     },
 

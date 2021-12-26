@@ -14,7 +14,15 @@ createInertiaApp({
     setup({el, app, props, plugin}) {
         return createApp({render: () => h(app, props)})
             .use(plugin).use(VueSweetalert2)
-            .mixin({methods: {route}})
+            .mixin({
+                methods: {
+                    route,
+
+                    ucfirst(string) {
+                        return string.charAt(0).toUpperCase() + string.slice(1)
+                    },
+                }
+            })
             .mount(el);
     },
 });

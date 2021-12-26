@@ -31,18 +31,21 @@ Route::get('/', function () {
 Route::get('pendaftaran-anggota', [MembersController::class, 'index'])->name('pendaftaran-anggota');
 Route::post('pendaftaran-anggota', [MembersController::class, 'store'])->name('pendaftaran-anggota.store');
 
+Route::get('artikel', [PostsController::class, 'show'])->name('artikel');
+Route::get('artikel/{post:slug}', [PostsController::class, 'single'])->name('artikel.single');
+
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('artikel', [PostsController::class, 'index'])->name('artikel');
-    Route::get('artikel/create', [PostsController::class, 'create'])->name('artikel.create');
-    Route::post('artikel', [PostsController::class, 'store'])->name('artikel.store');
-    Route::get('artikel/{post:slug}/edit', [PostsController::class, 'edit'])->name('artikel.edit');
-    Route::patch('artikel/{post:slug}', [PostsController::class, 'update'])->name('artikel.update');
-    Route::delete('artikel/{post:slug}', [PostsController::class, 'destroy'])->name('artikel.delete');
-    Route::get('artikel/createSlug', [PostsController::class, 'createSlug'])->name('artikel.createSlug');
+    Route::get('post', [PostsController::class, 'index'])->name('post');
+    Route::get('post/create', [PostsController::class, 'create'])->name('post.create');
+    Route::post('post', [PostsController::class, 'store'])->name('post.store');
+    Route::get('post/{post:slug}/edit', [PostsController::class, 'edit'])->name('post.edit');
+    Route::patch('post/{post:slug}', [PostsController::class, 'update'])->name('post.update');
+    Route::delete('post/{post:slug}', [PostsController::class, 'destroy'])->name('post.delete');
+    Route::get('post/createSlug', [PostsController::class, 'createSlug'])->name('post.createSlug');
 
     Route::get('anggota', [MembersController::class, 'show'])->name('anggota');
 

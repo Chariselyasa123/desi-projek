@@ -24,7 +24,7 @@
             </div>
 
             <options @alert="runAlert" @updateImage="onImageUpload" @updateCategories="categoriesSelected"
-                     :categories="categories" :postSlug="form.postSlug"/>
+                     :categories="categories" :postSlug="form.slug"/>
         </div>
 
     </app-layout>
@@ -59,7 +59,7 @@ export default defineComponent({
             form: this.$inertia.form({
                 postTitle: '',
                 postContent: '',
-                postSlug: '',
+                slug: '',
                 postImage: '',
                 postCategories: [],
             }),
@@ -68,7 +68,7 @@ export default defineComponent({
                     uploadUrl: `${this.route('upload.image')}?_token=${document.querySelector('meta[name="csrf-token"]').getAttribute('content')}`,
                 }
             },
-            postSlug: '',
+            slug: '',
             image: null,
             selectedCategories: [],
         };
@@ -76,7 +76,7 @@ export default defineComponent({
 
     methods: {
         posting() {
-            this.form.post(this.route('artikel.store'), {
+            this.form.post(this.route('post.store'), {
                 onSuccess: () => {
                     this.successAlert()
                     this.form.reset()
@@ -126,12 +126,12 @@ export default defineComponent({
         },
 
         createSlug(title) {
-            axios.get(this.route('artikel.createSlug'), {
+            axios.get(this.route('post.createSlug'), {
                 params: {
                     title: title
                 }
             }).then(response => {
-                this.form.postSlug = response.data.slug
+                this.form.slug = response.data.slug
             })
         },
 

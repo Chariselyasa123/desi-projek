@@ -2,8 +2,9 @@
     <app-layout title="Membuat Artikel">
 
         <!-- Make Artikel -->
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="py-12 grid grid-cols-5 gap-4">
+
+            <div class="max-w-7xl sm:px-6 lg:px-8 col-span-3 col-start-2">
                 <!-- Card -->
                 <div class="bg-white overflow-hidden shadow rounded-lg">
                     <!-- Card Header -->
@@ -11,7 +12,7 @@
                         <span class="font-bold text-2xl w-auto mr-5">Title </span>
                         <jet-input type="text" class="w-full" id="title" v-model="form.postTitle" placeholder="Title"/>
                         <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
-                                    @click.prevent="edit(post.id)">Edit
+                                    @click.prevent="edit(post.slug)">Edit
                         </jet-button>
                     </div>
                     <!-- Card Body -->
@@ -19,8 +20,10 @@
                         <ckeditor :editor="editor" v-model="form.postContent" :config="editorConfig"></ckeditor>
                     </div>
                 </div>
-
             </div>
+
+            <options @alert="runAlert" @updateImage="onImageUpload" @updateCategories="categoriesSelected"
+                     :categories="categories" :post="post" :postSlug="form.slug"/>
         </div>
 
     </app-layout>
@@ -34,10 +37,12 @@ import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Options from "@/Pages/Post/Partials/Options";
+import axios from "axios";
 
 export default defineComponent({
 
-    props: ['post'],
+    props: ['post', 'categories'],
 
     components: {
         AppLayout,
@@ -45,6 +50,7 @@ export default defineComponent({
         JetInput,
         JetLabel,
         ckeditor: CKEditor.component,
+        Options,
     },
 
     data() {
@@ -53,6 +59,9 @@ export default defineComponent({
             form: this.$inertia.form({
                 postTitle: this.post.post_title,
                 postContent: this.post.post_content,
+                slug: this.post.slug,
+                postImage: this.post.featured_image,
+                postCategories: this.post.categories.map(v => v.id),
             }),
             editorConfig: {
                 ckfinder: {
@@ -63,8 +72,8 @@ export default defineComponent({
     },
 
     methods: {
-        edit(id) {
-            this.form.patch(this.route('artikel.update', {id}), {
+        edit(slug) {
+            this.form.patch(this.route('post.update', {slug}), {
                 onSuccess: () => {
                     this.successAlert()
                     this.form.reset()
@@ -106,8 +115,29 @@ export default defineComponent({
                 animation: true,
                 title: Object.values(that.form.errors).map(value => `<ul class="list-disc"><li class="text-red-600">${value}</li></ul>`).join('\n'),
             });
+        },
 
-        }
+        runAlert() {
+            this.successAlert();
+        },
+
+        createSlug(title) {
+            axios.get(this.route('post.createSlug'), {
+                params: {
+                    title: title
+                }
+            }).then(response => {
+                this.form.slug = response.data.slug
+            })
+        },
+
+        onImageUpload(file) {
+            this.form.postImage = file;
+        },
+
+        categoriesSelected(selectedCategories) {
+            this.form.postCategories = selectedCategories;
+        },
     }
 })
 </script>

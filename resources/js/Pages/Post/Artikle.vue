@@ -6,7 +6,7 @@
                 <div class="bg-white overflow-hidden shadow rounded-lg">
                     <div class="px-4 py-5 border-b-4 border-gray-200 sm:px-6 flex justify-between">
                         <span class="text-2xl font-bold">Artikel</span>
-                        <Link :href="route('artikel.create')"
+                        <Link :href="route('post.create')"
                               class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
                             New Atikel
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24"
@@ -63,7 +63,7 @@
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                     <button class="text-indigo-600 hover:text-indigo-900"
-                                                            @click="editArtikel(post.id)">
+                                                            @click="editArtikel(post.slug)">
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
                                                              viewBox="0 0 20 20"
                                                              fill="currentColor">
@@ -75,7 +75,7 @@
                                                         </svg>
                                                     </button>
                                                     <button type="button" class="text-red-600 hover:text-red-900"
-                                                            @click="deleteArtikel(post.id)">
+                                                            @click="deleteArtikel(post.slug)">
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
                                                              fill="none"
                                                              viewBox="0 0 24 24" stroke="currentColor">
@@ -137,14 +137,15 @@ export default defineComponent({
         },
 
         editArtikel(id) {
-            this.$inertia.get(this.route('artikel.edit', {id}))
+            this.$inertia.get(this.route('post.edit', {id}))
         },
 
         delete(id) {
-            this.$inertia.delete(this.route('artikel.delete', {id}))
+            this.$inertia.delete(this.route('post.delete', {id}))
         },
 
-        deleteArtikel(id) {
+        deleteArtikel(slug) {
+            const that = this;
             this.$swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -155,12 +156,13 @@ export default defineComponent({
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    this.delete(id);
-                    this.$swal.fire(
+                    that.delete(slug);
+                    that.$swal.fire(
                         'Deleted!',
                         'Your file has been deleted.',
                         'success'
                     )
+                    window.location.reload();
                 }
             })
         }
