@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ImageUploadController;
+use App\Http\Controllers\MapsController;
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\PostsController;
 use Illuminate\Foundation\Application;
@@ -53,4 +54,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('upload/image', [ImageUploadController::class, 'imageUploadPost'])->name('upload.image');
 
     Route::post('category', [CategoriesController::class, 'store'])->name('category.store');
+
+    Route::get('data-maps', [MapsController::class, 'index'])->name('data-maps');
+    Route::get('data-maps/create', [MapsController::class, 'create'])->name('data-maps.create');
+    Route::get('data-maps/{id}/edit', [MapsController::class, 'edit'])->name('data-maps.edit');
+    Route::post('data-maps/store', [MapsController::class, 'store'])->name('data-maps.store');
+    Route::patch('data-maps/{map:id}', [MapsController::class, 'update'])->name('data-maps.update');
+    Route::delete('data-maps/{map:id}', [MapsController::class, 'destroy'])->name('data-maps.delete');
 });

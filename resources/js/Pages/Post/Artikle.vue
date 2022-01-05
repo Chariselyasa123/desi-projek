@@ -7,6 +7,7 @@
                 <div class="bg-white overflow-hidden shadow rounded-lg">
                     <div class="px-4 py-5 border-b-4 border-gray-200 sm:px-6 flex justify-between">
                         <span class="text-2xl font-bold">Artikel</span>
+                        <search-bar placeholder="Cari Artikel" @search="search"/>
                         <Link :href="route('post.create')"
                               class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
                             New Atikel
@@ -114,6 +115,7 @@ import AppLayout from '@/Layouts/AppLayout.vue'
 import JetButton from '@/Jetstream/Button.vue'
 import {Link} from '@inertiajs/inertia-vue3';
 import Pagination from "@/Pages/Component/Pagination";
+import SearchBar from "@/Pages/Component/SearchBar";
 
 export default defineComponent({
 
@@ -124,6 +126,7 @@ export default defineComponent({
         JetButton,
         Link,
         Pagination,
+        SearchBar,
     },
 
     methods: {
@@ -174,7 +177,11 @@ export default defineComponent({
                     window.location.reload();
                 }
             })
-        }
+        },
+
+        search(search) {
+            this.$inertia.get(this.route('post', {search: search}))
+        },
     },
 })
 </script>

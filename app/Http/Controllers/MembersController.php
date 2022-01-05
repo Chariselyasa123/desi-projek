@@ -52,10 +52,14 @@ class MembersController extends Controller
         return redirect()->route('pendaftaran-anggota')->with('message', 'Berhasi Mendaftarkan Anggota');
     }
 
-    public function show(Member $member)
+    public function show(Request $request)
     {
         return Inertia::render('Anggota/InformasiAnggota', [
-            'members' => $member->with('faculty', 'program')->paginate(10)->through(function ($data) {
+            'members' => Member::with('faculty', 'program')->when($request->search, function ($query, $search) {
+                return $query->where('name', 'like', "%{$search}%")
+                             ->orWhere('status', 'like', "%{$search}%")
+                             ->orWhere('semester', 'like', "%{$search}%");
+            })->paginate(10)->through(function ($data) {
                 return [
                     'id'        => $data->id,
                     'name'      => $data->name,

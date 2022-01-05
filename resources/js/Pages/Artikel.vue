@@ -1,10 +1,11 @@
 <template>
     <page-layout title="Artikel">
-        <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-            <div class="grid gap-8 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
+        <div class="px-4 py-14 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
 
+            <div class="grid gap-8 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
+                <search-bar placeholder="Cari Artikel" @search="search" class="col-span-3" :searchArtikel="true"/>
                 <div class="overflow-hidden transition-shadow duration-300 bg-white rounded shadow-sm"
-                     v-for="post in posts">
+                     v-for="post in posts.data">
                     <img
                         :src="post.featured_image"
                         class="object-cover w-full h-64" alt=""/>
@@ -31,7 +32,11 @@
                         </Link>
                     </div>
                 </div>
+            </div>
 
+            <!--Pagination-->
+            <div class="mt-6">
+                <pagination :links="posts.links"/>
             </div>
         </div>
     </page-layout>
@@ -41,6 +46,8 @@
 import {defineComponent} from 'vue'
 import PageLayout from "@/Pages/Component/PageLayout";
 import {Link} from "@inertiajs/inertia-vue3";
+import Pagination from "@/Pages/Component/Pagination";
+import SearchBar from "@/Pages/Component/SearchBar";
 
 export default defineComponent({
 
@@ -49,7 +56,14 @@ export default defineComponent({
     components: {
         PageLayout,
         Link,
+        Pagination,
+        SearchBar,
     },
 
+    methods: {
+        search(search) {
+            this.$inertia.get(this.route('artikel', {search: search}))
+        },
+    }
 })
 </script>

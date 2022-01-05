@@ -12,10 +12,12 @@ use Inertia\Inertia;
 
 class PostsController extends Controller
 {
-    public function index(): \Inertia\Response
+    public function index(Request $request): \Inertia\Response
     {
         return Inertia::render('Post/Artikle', [
-            'posts' => Post::with('user')->paginate(10)->through(function ($post) {
+            'posts' => Post::with('user')->when($request->search, function ($query, $search) {
+                return $query->where('post_title', 'like', "%{$search}%");
+            })->paginate(10)->through(function ($post) {
                 return [
                     'post_title'   => $post->post_title,
                     'author'       => $post->user->name,
@@ -55,10 +57,12 @@ class PostsController extends Controller
         return redirect()->route('post')->with('message', 'Berhasil Menambah Artikel');
     }
 
-    public function show(Post $post)
+    public function show(Request $request, Post $post)
     {
         return Inertia::render('Artikel', [
-            'posts' => $post->with('categories')->latest()->get()->map(function ($post) {
+            'posts' => $post->with('categories')->when($request->search, function ($query, $search) {
+                return $query->where('post_title', 'like', "%{$search}%");
+            })->latest()->paginate(6)->through(function ($post) {
                 return [
                     'post_title'     => $post->post_title,
                     'featured_image' => $post->featured_image,

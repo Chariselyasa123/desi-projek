@@ -12,13 +12,13 @@ export default defineComponent({
     components: {
         Link,
     },
-    props: ['href', 'active'],
+    props: ['href', 'active', 'changeTextColor'],
 
     computed: {
         classes() {
             return this.active
-                ? 'font-bold tracking-wide text-white'
-                : 'font-bold tracking-wide transition-colors duration-200 hover:text-blue-700 focus:text-white'
+                ? this.changeTextColor ? 'font-bold tracking-wide text-white' : 'font-bold tracking-wide text-blue-700'
+                : this.changeTextColor ? 'font-bold tracking-wide transition-colors duration-200 hover:text-blue-700 focus:text-white' : 'font-bold tracking-wide transition-colors duration-200 text-white hover:text-blue-700 focus:text-indigo-400'
         }
     }
 })

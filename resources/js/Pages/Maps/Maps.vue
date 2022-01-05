@@ -1,14 +1,25 @@
 <template>
-    <app-layout title="Informasi Anggota">
+    <app-layout title="Data Maps">
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
                 <!-- Card -->
                 <div class="bg-white overflow-hidden shadow rounded-lg">
+
                     <div class="px-4 py-5 border-b-4 border-gray-200 sm:px-6 flex justify-between">
-                        <span class="text-2xl font-bold">Informasi Anggota</span>
-                        <search-bar placeholder="Cari Anggota" @search="search"/>
+                        <span class="text-2xl font-bold">Data Maps</span>
+                        <!--                        <search-bar placeholder="Cari Artikel" @search="search"/>-->
+                        <Link :href="route('data-maps.create')"
+                              class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
+                            New Maps Data
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24"
+                                 stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </Link>
                     </div>
+
                     <!-- Card Body -->
                     <div class="px-4 py-5 sm:p-0 mt-2">
                         <!-- Make Table With Tailwindcss -->
@@ -25,23 +36,23 @@
                                                 </th>
                                                 <th scope="col"
                                                     class="header-table">
-                                                    Nama Anggota
+                                                    Nama Gunung
                                                 </th>
                                                 <th scope="col"
                                                     class="header-table">
-                                                    Informasi Kuliah
+                                                    Informasi Gunung
                                                 </th>
                                                 <th scope="col"
                                                     class="header-table">
-                                                    Usia
+                                                    Status Pendakian
                                                 </th>
                                                 <th scope="col"
                                                     class="header-table">
-                                                    Tanggal Daftar
+                                                    Cuaca
                                                 </th>
                                                 <th scope="col"
                                                     class="header-table">
-                                                    Status Anggota
+                                                    Biaya Simaksi
                                                 </th>
                                                 <th scope="col" class="relative px-6 py-3">
                                                     <span class="sr-only">Edit</span>
@@ -49,35 +60,43 @@
                                             </tr>
                                             </thead>
                                             <tbody class="bg-white divide-y divide-gray-200">
-                                            <tr v-for="(member, index) in members.data">
+                                            <tr v-for="(map, index) in maps">
                                                 <td class="px-6 py-4 whitespace-nowrap">
-                                                    {{ (members.current_page - 1) * members.per_page + index + 1 }}
+                                                    {{ index + 1 }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
-                                                    {{ member.name }}
+                                                    {{ map.nama_gunung }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
-                                                    <div class="text-sm text-gray-900">
-                                                        {{ member.fakultas }}
+                                                    <div class="text-sm text-gray-900 flex gap-4">
+                                                        Status
+                                                        <span
+                                                            :class=" map.status_gunung.toLowerCase() === 'aktif'? 'text-red-700' : 'text-green-600' ">
+                                                            {{ map.status_gunung }}
+                                                        </span>
                                                     </div>
                                                     <div class="text-sm text-gray-500">
-                                                        {{ member.jurusan }} - {{ member.jenjang }}
+                                                        {{ map.jenis_gunung }}
                                                     </div>
                                                     <div class="text-sm text-gray-500">
-                                                        Semester {{ member.semester }}
+                                                        {{ map.tinggi }} mdpl
+                                                    </div>
+                                                    <div class="text-sm text-gray-500">
+                                                        ± {{ map.luas }} Ha
                                                     </div>
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                    {{ member.usia }}
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    {{ map.status_pendakian }}
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                    {{ member.tglDaftar }}
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    {{ map.cuaca }}
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                    {{ member.status }}
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    Rp. {{ numberFormat(parseInt(map.biaya_simaksi), 0, ',', '.') }}
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                    <button class="text-indigo-600 hover:text-indigo-900">
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <button class="text-indigo-600 hover:text-indigo-900"
+                                                            @click="editMap(map.id)">
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
                                                              viewBox="0 0 20 20"
                                                              fill="currentColor">
@@ -89,8 +108,7 @@
                                                         </svg>
                                                     </button>
                                                     <button type="button" class="text-red-600 hover:text-red-900"
-                                                            @click="deleteAnggota(member.id)"
-                                                    >
+                                                            @click="deleteMap(map.id)">
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
                                                              fill="none"
                                                              viewBox="0 0 24 24" stroke="currentColor">
@@ -101,8 +119,6 @@
                                                     </button>
                                                 </td>
                                             </tr>
-
-                                            <!-- More people... -->
                                             </tbody>
                                         </table>
                                     </div>
@@ -110,12 +126,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!--Pagination-->
-                <div class="mt-6">
-                    <pagination :links="members.links"/>
                 </div>
+                <!-- End Card -->
 
             </div>
         </div>
@@ -124,51 +137,77 @@
 
 <script>
 import {defineComponent} from 'vue'
-import AppLayout from '@/Layouts/AppLayout.vue'
-import Pagination from '@/Pages/component/Pagination.vue'
-import SearchBar from "@/Pages/Component/SearchBar";
+import AppLayout from "@/Layouts/AppLayout";
+import {Link} from '@inertiajs/inertia-vue3';
 
 export default defineComponent({
 
-    props: ['members'],
+    props: {
+        maps: {
+            type: Object,
+            default: () => ({})
+        }
+    },
 
     components: {
         AppLayout,
-        Pagination,
-        SearchBar,
+        Link,
     },
 
     methods: {
-
-        delete(id) {
-            this.$inertia.delete(this.route('anggota.delete', {id}))
+        editMap(id) {
+            this.$inertia.get(this.route('data-maps.edit', {id}))
         },
 
-        deleteAnggota(id) {
+        deleteMap(id) {
             const that = this;
             this.$swal.fire({
-                title: 'Apakah kamu yakin ingin menghapus anggota?',
-                text: "Anda tidak akan dapat mengembalikan anggota yang terhapus!",
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, hapus!'
+                confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    that.delete(id);
+                    that.$inertia.delete(this.route('data-maps.delete', {id}))
                     that.$swal.fire(
-                        'Terhapus!',
-                        'Anggota telah terhapus.',
+                        'Deleted!',
+                        'Your file has been deleted.',
                         'success'
                     )
+                    window.location.reload();
                 }
             })
         },
 
-        search(search) {
-            this.$inertia.get(this.route('anggota', {search: search}))
+        numberFormat(number, decimals, decPoint, thousandsSep) {
+            number = (number + '').replace(/[^0-9+\-Ee.]/g, '')
+            const n = !isFinite(+number) ? 0 : +number
+            const prec = !isFinite(+decimals) ? 0 : Math.abs(decimals)
+            const sep = (typeof thousandsSep === 'undefined') ? ',' : thousandsSep
+            const dec = (typeof decPoint === 'undefined') ? '.' : decPoint
+            let s = ''
+
+            const toFixedFix = function (n, prec) {
+                const k = Math.pow(10, prec)
+                return '' + (Math.round(n * k) / k)
+                    .toFixed(prec)
+            }
+
+            s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.')
+            if (s[0].length > 3) {
+                s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep)
+            }
+            if ((s[1] || '').length < prec) {
+                s[1] = s[1] || ''
+                s[1] += new Array(prec - s[1].length + 1).join('0')
+            }
+
+            return s.join(dec)
         },
     },
+
 })
 </script>

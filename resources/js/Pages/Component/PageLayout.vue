@@ -2,8 +2,9 @@
     <div>
         <Head :title="title"/>
 
-        <div class="bg-[url('/images/mountain.jpg')]">
-            <div class="px-4 py-5 sm:max-w-xl md:max-w-full md:px-24 lg:px-8">
+        <div :class="changeBackground">
+            <div class="px-4 py-5 sm:max-w-xl md:max-w-full md:px-24 lg:px-8"
+                 :class="artikelHeader">
                 <div class="relative flex items-center justify-between">
                     <div class="flex items-center">
                         <Link :href="route('welcome')" :active="route().current('welcome')"
@@ -15,17 +16,20 @@
                         </Link>
                         <ul class="flex items-center hidden space-x-8 lg:flex">
                             <li>
-                                <nav-link :href="route('welcome')" :active="route().current('welcome')">Beranda
+                                <nav-link :href="route('welcome')" :active="route().current('welcome')"
+                                          :changeTextColor="route().current('welcome')">Beranda
                                 </nav-link
                                 >
                             </li>
                             <li>
-                                <nav-link :href="route('artikel')" :active="route().current('artikel')">Artikel
+                                <nav-link :href="route('artikel')" :active="route().current('artikel')"
+                                          :changeTextColor="route().current('welcome')">Artikel
                                 </nav-link>
                             </li>
                             <li>
                                 <nav-link :href="route('pendaftaran-anggota')"
-                                          :active="route().current('pendaftaran-anggota')">Pendaftaran Anggota
+                                          :active="route().current('pendaftaran-anggota')"
+                                          :changeTextColor="route().current('welcome')">Pendaftaran Anggota
                                 </nav-link
                                 >
                             </li>
@@ -148,25 +152,13 @@ export default defineComponent({
         };
     },
 
-    methods: {
-        handleScroll(event) {
-            "use strict";
-            if (window.scrollY > 4) {
-                this.$refs.navbar.classList.add('scrolled');
-                this.$refs.logo.classList.add('hidden');
-            } else {
-                this.$refs.navbar.classList.remove('scrolled');
-                this.$refs.logo.classList.remove('hidden');
-            }
+    computed: {
+        artikelHeader() {
+            return this.route().current('artikel.*') ? 'bg-white drop-shadow-md' : ''
         },
-    },
-
-    mounted() {
-        window.addEventListener('scroll', this.handleScroll);
-    },
-
-    unmounted() {
-        window.removeEventListener('scroll', this.handleScroll);
+        changeBackground() {
+            return this.route().current('welcome') ? 'bg-[url(\'/images/mountain.jpg\')]' : 'bg-black repeat-y'
+        },
     },
 })
 </script>
