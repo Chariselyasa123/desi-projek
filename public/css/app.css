@@ -1518,6 +1518,9 @@ select {
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
 }
+.bg-\[url\(\'\/images\/mountain\.jpg\'\)\] {
+  background-image: url('/images/mountain.jpg');
+}
 .bg-cover {
   background-size: cover;
 }
@@ -2053,13 +2056,19 @@ hr.solid {
     background-color: rgba(255, 255, 255, 0.5);
 }
 .layout_footer {
-
     background-image: linear-gradient(0deg, rgba(255, 0, 0, 0.6), rgba(255, 0, 0, 0.6)), url('http://placekitten.com.s3.amazonaws.com/homepage-samples/408/287.jpg');
-
     background-size: cover;
-
     height: 100px;
-
+}
+.leaflet-top.leaflet-left {
+    bottom: 100px !important;
+    right: 20px !important;
+    left: unset;
+    top: unset;
+}
+.leaflet-top.leaflet-right {
+    right: unset;
+    left: 10px;
 }
 .hover\:cursor-pointer:hover {
   cursor: pointer;

@@ -24,7 +24,7 @@ class MapsController extends Controller
     {
         $request->validate([
             'nama_gunung'              => 'required|string|max:255',
-            'tinggi'                   => 'required|integer',
+            'tinggi'                   => 'required|numeric',
             'luas'                     => 'required|numeric',
             'jenis_gunung'             => 'required|string|max:255',
             'status_gunung'            => 'required|string|max:255',
@@ -37,7 +37,8 @@ class MapsController extends Controller
             'biaya_simaksi'            => 'required|integer',
             'data_kecelakaan_gunung'   => 'required|string',
             'contact_us'               => 'required|string|max:255',
-            'coordinates'              => 'required|string',
+            'long'                     => 'required',
+            'lat'                      => 'required',
         ]);
 
         Map::create($request->all());
@@ -47,7 +48,7 @@ class MapsController extends Controller
 
     public function show(Map $map)
     {
-        //
+        return view('sebaran-gunung');
     }
 
     public function edit(Map $map)
@@ -74,9 +75,9 @@ class MapsController extends Controller
             'biaya_simaksi'            => 'required',
             'data_kecelakaan_gunung'   => 'required',
             'contact_us'               => 'required',
-            'coordinates'              => 'required',
+            'long'                     => 'required',
+            'lat'                      => 'required',
         ]);
-
 
         $map->update($request->all());
 

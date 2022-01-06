@@ -2,7 +2,7 @@
     <div>
         <Head :title="title"/>
 
-        <div :class="changeBackground">
+        <div class="bg-[url('/images/mountain.jpg')]">
             <div class="px-4 py-5 sm:max-w-xl md:max-w-full md:px-24 lg:px-8"
                  :class="artikelHeader">
                 <div class="relative flex items-center justify-between">

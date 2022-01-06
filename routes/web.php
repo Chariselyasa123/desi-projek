@@ -35,6 +35,8 @@ Route::post('pendaftaran-anggota', [MembersController::class, 'store'])->name('p
 Route::get('artikel', [PostsController::class, 'show'])->name('artikel');
 Route::get('artikel/{post:slug}', [PostsController::class, 'single'])->name('artikel.single');
 
+Route::get('sebaran-gunung', [MapsController::class, 'show'])->name('sebaran-gunung');
+
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('Dashboard');

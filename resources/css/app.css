@@ -82,11 +82,19 @@ hr.solid {
 }
 
 .layout_footer {
-
     background-image: linear-gradient(0deg, rgba(255, 0, 0, 0.6), rgba(255, 0, 0, 0.6)), url('http://placekitten.com.s3.amazonaws.com/homepage-samples/408/287.jpg');
-
     background-size: cover;
-
     height: 100px;
+}
 
+.leaflet-top.leaflet-left {
+    bottom: 100px !important;
+    right: 20px !important;
+    left: unset;
+    top: unset;
+}
+
+.leaflet-top.leaflet-right {
+    right: unset;
+    left: 10px;
 }
