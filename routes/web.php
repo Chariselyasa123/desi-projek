@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\MapsController;
@@ -36,6 +37,9 @@ Route::get('artikel', [PostsController::class, 'show'])->name('artikel');
 Route::get('artikel/{post:slug}', [PostsController::class, 'single'])->name('artikel.single');
 
 Route::get('sebaran-gunung', [MapsController::class, 'show'])->name('sebaran-gunung');
+Route::get('sebaran-gunung/{id}', [MapsController::class, 'single'])->name('sebaran-gunung');
+
+Route::get('tentang-kami', [MapsController::class, 'show'])->name('tentang-kami');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('dashboard', function () {
@@ -63,4 +67,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('data-maps/store', [MapsController::class, 'store'])->name('data-maps.store');
     Route::patch('data-maps/{map:id}', [MapsController::class, 'update'])->name('data-maps.update');
     Route::delete('data-maps/{map:id}', [MapsController::class, 'destroy'])->name('data-maps.delete');
+
+    Route::get('struktur-organisasi', [AboutUsController::class, 'index'])->name('struktur-organisasi');
+    Route::get('struktur-organisasi/create', [AboutUsController::class, 'create'])->name('struktur-organisasi.create');
+    Route::post('struktur-organisasi/store', [AboutUsController::class, 'store'])->name('struktur-organisasi.store');
+    Route::get('struktur-organisasi/{periode_menjabat}', [AboutUsController::class, 'getData'])->name('struktur-organisasi.periode');
 });

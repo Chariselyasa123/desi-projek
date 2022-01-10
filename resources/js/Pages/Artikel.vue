@@ -7,7 +7,7 @@
                 <div class="overflow-hidden transition-shadow duration-300 bg-white rounded shadow-sm"
                      v-for="post in posts.data">
                     <img
-                        :src="post.featured_image"
+                        :src="post.featured_image || '/images/default-image.png'"
                         class="object-cover w-full h-64" alt=""/>
                     <div class="p-5 border border-t-0">
                         <p class="mb-3 text-xs font-semibold tracking-wide uppercase">

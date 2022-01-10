@@ -48,7 +48,9 @@ class MapsController extends Controller
 
     public function show(Map $map)
     {
-        return view('sebaran-gunung');
+        return view('sebaran-gunung', [
+            'maps' => $map->all()->toArray(),
+        ]);
     }
 
     public function edit(Map $map)
@@ -89,5 +91,12 @@ class MapsController extends Controller
         $map->delete();
 
         return redirect()->route('data-maps')->with('message', 'Map deleted successfully.');
+    }
+
+    public function single(Map $map)
+    {
+        return Inertia::render('Gunung', [
+            'map' => $map->first(),
+        ]);
     }
 }

@@ -959,17 +959,29 @@ select {
 .z-40 {
   z-index: 40;
 }
+.z-10 {
+  z-index: 10;
+}
+.z-20 {
+  z-index: 20;
+}
 .col-span-6 {
   grid-column: span 6 / span 6;
 }
 .col-span-3 {
   grid-column: span 3 / span 3;
 }
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
 .col-start-2 {
   grid-column-start: 2;
 }
 .col-start-5 {
   grid-column-start: 5;
+}
+.col-start-4 {
+  grid-column-start: 4;
 }
 .m-auto {
   margin: auto;
@@ -1070,12 +1082,6 @@ select {
 .mb-10 {
   margin-bottom: 2.5rem;
 }
-.-mt-8 {
-  margin-top: -2rem;
-}
-.-ml-20 {
-  margin-left: -5rem;
-}
 .mr-8 {
   margin-right: 2rem;
 }
@@ -1096,6 +1102,39 @@ select {
 }
 .mr-5 {
   margin-right: 1.25rem;
+}
+.mt-9 {
+  margin-top: 2.25rem;
+}
+.mt-14 {
+  margin-top: 3.5rem;
+}
+.mt-20 {
+  margin-top: 5rem;
+}
+.mt-28 {
+  margin-top: 7rem;
+}
+.mt-32 {
+  margin-top: 8rem;
+}
+.ml-10 {
+  margin-left: 2.5rem;
+}
+.ml-8 {
+  margin-left: 2rem;
+}
+.mt-24 {
+  margin-top: 6rem;
+}
+.ml-9 {
+  margin-left: 2.25rem;
+}
+.mr-7 {
+  margin-right: 1.75rem;
+}
+.ml-5 {
+  margin-left: 1.25rem;
 }
 .block {
   display: block;
@@ -1232,6 +1271,9 @@ select {
 .max-w-lg {
   max-width: 32rem;
 }
+.max-w-2xl {
+  max-width: 42rem;
+}
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -1295,6 +1337,12 @@ select {
 .grid-cols-5 {
   grid-template-columns: repeat(5, minmax(0, 1fr));
 }
+.grid-cols-7 {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+.grid-cols-8 {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}
 .flex-col {
   flex-direction: column;
 }
@@ -1315,6 +1363,9 @@ select {
 }
 .justify-between {
   justify-content: space-between;
+}
+.justify-items-center {
+  justify-items: center;
 }
 .gap-6 {
   gap: 1.5rem;
@@ -1511,10 +1562,6 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(156 163 175 / var(--tw-bg-opacity));
 }
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
-}
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
 }
@@ -1657,6 +1704,12 @@ select {
 }
 .pr-16 {
   padding-right: 4rem;
+}
+.pt-3 {
+  padding-top: 0.75rem;
+}
+.pt-7 {
+  padding-top: 1.75rem;
 }
 .text-left {
   text-align: left;
@@ -1829,6 +1882,10 @@ select {
 .text-blue-700 {
   --tw-text-opacity: 1;
   color: rgb(29 78 216 / var(--tw-text-opacity));
+}
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 .text-red-700 {
   --tw-text-opacity: 1;
@@ -2053,7 +2110,7 @@ hr.solid {
     font-weight: revert;
 }
 .transparent {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.7);
 }
 .layout_footer {
     background-image: linear-gradient(0deg, rgba(255, 0, 0, 0.6), rgba(255, 0, 0, 0.6)), url('http://placekitten.com.s3.amazonaws.com/homepage-samples/408/287.jpg');
@@ -2309,6 +2366,10 @@ hr.solid {
     grid-column: span 4 / span 4;
   }
 
+  .sm\:col-span-1 {
+    grid-column: span 1 / span 1;
+  }
+
   .sm\:mx-0 {
     margin-left: 0px;
     margin-right: 0px;
@@ -2420,6 +2481,10 @@ hr.solid {
     --tw-scale-x: 1;
     --tw-scale-y: 1;
     transform: var(--tw-transform);
+  }
+
+  .sm\:grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
   .sm\:items-start {
@@ -2541,6 +2606,10 @@ hr.solid {
     height: 20rem;
   }
 
+  .md\:w-9\/12 {
+    width: 75%;
+  }
+
   .md\:max-w-full {
     max-width: 100%;
   }
@@ -2581,14 +2650,6 @@ hr.solid {
     margin-right: -2rem;
   }
 
-  .lg\:-ml-28 {
-    margin-left: -7rem;
-  }
-
-  .lg\:-mt-10 {
-    margin-top: -2.5rem;
-  }
-
   .lg\:flex {
     display: flex;
   }
@@ -2599,10 +2660,6 @@ hr.solid {
 
   .lg\:h-96 {
     height: 24rem;
-  }
-
-  .lg\:w-32 {
-    width: 8rem;
   }
 
   .lg\:max-w-screen-xl {

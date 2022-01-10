@@ -56,8 +56,13 @@
 
 
 <script>
+    const maps = @json($maps);
+    const wilayahBanten = '{{ asset('js/wilayah-banten.json') }}';
+    const wilayahMarker = '{{ asset('js/wilayah-marker.json') }}';
     var geojson;
     var map;
+
+    console.log(wilayahBanten)
 
     // Set Mapbox and Style
     L.mapbox.accessToken = 'pk.eyJ1IjoibGFzaWRhIiwiYSI6ImNqcHV0dm5uNTBrcWszeGxnd2Z6enpyMm4ifQ.syGeQYzbXKZXw1KOi_iYTA';
@@ -80,37 +85,21 @@
         .setView([-6.404013, 105.958238], 8); // Set View
 
     // Shape File format GeoJSON
-    jQuery.getJSON("https://wilayah-banten.free.beeceptor.com/wilayah/banten", function (data) {
-        // Add GeoJSON layer to the map once the file is loaded
-        // console.log( data );
-        geojson = L.geoJson(data, {
-            style: style,
-            onEachFeature: onEachFeature
-        }).addTo(map);
-
+    jQuery.getJSON(wilayahBanten, function (data) {
         render_mapala_marker(); // Call the Marker
     });
 
 
     async function render_mapala_marker() {
-        const response = await fetch('https://wilayah-banten.free.beeceptor.com/wilayah/marker');
-
-        const data = await response.json();
-
-
-        jQuery.each(data, function (i, item) { // Loop Location
-            jQuery.each(item, function (i, org) { // Loop Item
-                if (org.coordinate) {
-                    console.log(org.coordinate);
-                    L.marker(org.coordinate, {
-                        icon: L.icon({
-                            iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png',
-                            popupAnchor: [15, 18],
-                            className: 'redIcon'
-                        })
-                    }).bindPopup('<a href="' + org.link + '">' + org.name + '</a>').addTo(map);
-                }
-            });
+        maps.forEach(data => {
+            L.marker([data.lat, data.long], {
+                icon: L.mapbox.marker.icon({
+                    'marker-color': '#f86767',
+                    'marker-size': 'medium',
+                    'marker-symbol': 'mountain'
+                })
+            })
+                .bindPopup(`<a href="/sebaran-gunung/${data.id}" target="_blank">${data.nama_gunung}</a>`).addTo(map);
         });
 
         setIconSize();

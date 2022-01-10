@@ -40,7 +40,6 @@ class PostsController extends Controller
         $request->validate([
             'postTitle'      => 'required|string|max:255',
             'postContent'    => 'required',
-            'postImage'      => 'required|url|max:255',
             'postCategories' => 'required|array|min:1|max:3',
             'slug'           => 'required|string|max:255|unique:posts',
         ]);

@@ -17,19 +17,19 @@
                         <ul class="flex items-center hidden space-x-8 lg:flex">
                             <li>
                                 <nav-link :href="route('welcome')" :active="route().current('welcome')"
-                                          :changeTextColor="route().current('welcome')">Beranda
+                                          :class="textColor">Beranda
                                 </nav-link
                                 >
                             </li>
                             <li>
                                 <nav-link :href="route('artikel')" :active="route().current('artikel')"
-                                          :changeTextColor="route().current('welcome')">Artikel
+                                          :class="textColor">Artikel
                                 </nav-link>
                             </li>
                             <li>
                                 <nav-link :href="route('pendaftaran-anggota')"
-                                          :active="route().current('pendaftaran-anggota')"
-                                          :changeTextColor="route().current('welcome')">Pendaftaran Anggota
+                                          :active="route().current('pendaftaran-anggota')" :class="textColor">
+                                    Pendaftaran Anggota
                                 </nav-link
                                 >
                             </li>
@@ -37,10 +37,10 @@
                     </div>
                     <ul class="flex items-center hidden space-x-8 lg:flex">
                         <li>
-                            <nav-link>Tentang Kami</nav-link>
+                            <nav-link :class="textColor">Tentang Kami</nav-link>
                         </li>
                         <li>
-                            <nav-link>Hubungi Kami</nav-link>
+                            <nav-link :class="textColor">Hubungi Kami</nav-link>
                         </li>
                     </ul>
                     <div class="lg:hidden">
@@ -122,7 +122,7 @@
             </div>
 
             <!-- page content -->
-            <div class="flex flex-col h-screen">
+            <div class="flex flex-col" :class="bodyHeight">
                 <slot></slot>
             </div>
         </div>
@@ -154,10 +154,13 @@ export default defineComponent({
 
     computed: {
         artikelHeader() {
-            return this.route().current('artikel.*') ? 'bg-white drop-shadow-md' : ''
+            return this.route().current('artikel.*') ? 'transparent drop-shadow-md' : ''
         },
-        changeBackground() {
-            return this.route().current('welcome') ? 'bg-[url(\'/images/mountain.jpg\')]' : 'bg-black repeat-y'
+        bodyHeight() {
+            return this.route().current('welcome') ? 'h-screen' : ''
+        },
+        textColor() {
+            return this.route().current('artikel.*') ? 'text-black' : ''
         },
     },
 })

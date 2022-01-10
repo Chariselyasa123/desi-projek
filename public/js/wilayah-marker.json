@@ -1,0 +1,27 @@
+{
+    "tangerang": [
+        {
+            "flag": "http://void.lab/wp-content/uploads/2020/08/Pealip-removebg-preview-80x80.png",
+            "name": "RIPALA Tangerang",
+            "coordinate" : [-6.1718076, 106.633471]
+        },
+        {
+            "flag": "http://void.lab/wp-content/uploads/2020/08/mahesa-removebg-preview-80x80.png",
+            "name": "MAPALA Mahesa",
+            "coordinate" : [-6.1892673, 106.6358212]
+        }
+    ],
+    "serang": [
+        {
+            "flag": "http://void.lab/wp-content/uploads/2020/08/Pealip-removebg-preview-80x80.png",
+            "name": "MAPALA Krakatau",
+            "coordinate" : [-5.99662635, 106.03158729]
+        },
+        {
+            "flag": "http://void.lab/wp-content/uploads/2020/08/mahesa-removebg-preview-80x80.png",
+            "name": "MAPALA Serang",
+            "coordinate" : [-6.11939048, 106.15213394]
+        }
+    ]
+}
+
