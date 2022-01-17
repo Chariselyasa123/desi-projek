@@ -11,20 +11,20 @@ class CreateMapsTable extends Migration
         Schema::create('maps', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->string('nama_gunung');
-            $table->string('tinggi');
-            $table->string('luas');
-            $table->string('jenis_gunung');
-            $table->string('status_gunung');
-            $table->string('status_pendakian');
+            $table->string('nama_gunung', 50);
+            $table->string('tinggi', 15);
+            $table->string('luas', 20);
+            $table->string('jenis_gunung', 100);
+            $table->string('status_gunung', 15);
+            $table->string('status_pendakian', 10);
             $table->string('cuaca');
             $table->string('kuota_pendakian_hari_ini');
             $table->string('jalur_pendakian');
             $table->mediumText('persyaratan_pendakian');
             $table->mediumText('peraturan_wilayah_gunung');
-            $table->string('biaya_simaksi');
+            $table->string('biaya_simaksi', 25);
             $table->mediumText('data_kecelakaan_gunung');
-            $table->string('contact_us');
+            $table->string('contact_us', 13);
             $table->decimal('long', 10, 7);
             $table->decimal('lat', 10, 7);
 

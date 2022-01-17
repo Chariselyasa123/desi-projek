@@ -9,7 +9,7 @@ class AddJenjangToProgramTable extends Migration
     public function up()
     {
         Schema::table('programs', function (Blueprint $table) {
-            $table->string('jenjang');
+            $table->string('jenjang', 6);
         });
     }
 

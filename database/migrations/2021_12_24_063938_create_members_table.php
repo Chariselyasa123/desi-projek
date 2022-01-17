@@ -15,10 +15,10 @@ class CreateMembersTable extends Migration
 
             $table->string('name', 50);
             $table->tinyInteger('semester');
-            $table->string('tempat_lahir', 50);
+            $table->string('tempat_lahir', 25);
             $table->date('birthday');
             $table->mediumText('address');
-            $table->string('phone', 15);
+            $table->string('phone', 13);
             $table->string('email', 50);
             $table->string('status', 30)->default('caang');
 

@@ -12,7 +12,7 @@ class CreateProgramsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('faculty_id');
 
-            $table->string('nama_prodi');
+            $table->string('nama_prodi', 100);
 
             $table->foreign('faculty_id')->references('id')->on('faculties')->onDelete('cascade');
         });
