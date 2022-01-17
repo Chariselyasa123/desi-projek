@@ -40,6 +40,7 @@ Route::get('sebaran-gunung', [MapsController::class, 'show'])->name('sebaran-gun
 Route::get('sebaran-gunung/{id}', [MapsController::class, 'single'])->name('sebaran-gunung');
 
 Route::get('tentang-kami', [AboutUsController::class, 'show'])->name('tentang-kami');
+Route::get('struktur', [AboutUsController::class, 'struktur'])->name('struktur');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('dashboard', function () {

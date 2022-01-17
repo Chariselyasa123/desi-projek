@@ -9,7 +9,7 @@
         <div class="m-auto flex flex-col items-center">
             <a href="/sebaran-gunung"
                class="text-white bg-gray-800 rounded-full px-8 py-3 flex items-center">
-                Aku ingin menjelah
+                Aku ingin menjelajah
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 bounce-right" viewBox="0 0 20 20"
                      fill="currentColor">
                     <path fill-rule="evenodd"

@@ -48,6 +48,12 @@ class AboutUsController extends Controller
         return Inertia::render('TentangKami');
     }
 
+    public function struktur(AboutUs $aboutUs){
+        return Inertia::render('StrukturOrganisasi', [
+            'strukturOrganisasi' => $aboutUs->all()
+        ]);
+    }
+
     public function edit(AboutUs $aboutUs)
     {
         //
