@@ -22416,17 +22416,18 @@ __webpack_require__.r(__webpack_exports__);
     SearchBar: _Pages_Component_SearchBar__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   data: function data() {
+    var struktur = this.struktur || false;
     return {
-      ketua_umum: this.struktur.ketua_umum || '',
-      bendahara: this.struktur.bendahara || '',
-      sekertaris: this.struktur.sekertaris || '',
-      kepala_bidang_1: this.struktur.kepala_bidang_1 || '',
-      kepala_bidang_2: this.struktur.kepala_bidang_2 || '',
-      kepala_bidang_3: this.struktur.kepala_bidang_3 || '',
-      kepala_bidang_4: this.struktur.kepala_bidang_4 || '',
-      kepala_bidang_5: this.struktur.kepala_bidang_5 || '',
-      kepala_divisi_1: this.struktur.kepala_divisi_1 || '',
-      kepala_divisi_2: this.struktur.kepala_divisi_2 || ''
+      ketua_umum: struktur ? struktur.ketua_umum : '',
+      bendahara: struktur ? struktur.bendahara : '',
+      sekertaris: struktur ? struktur.sekertaris : '',
+      kepala_bidang_1: struktur ? struktur.kepala_bidang_1 : '',
+      kepala_bidang_2: struktur ? struktur.kepala_bidang_2 : '',
+      kepala_bidang_3: struktur ? struktur.kepala_bidang_3 : '',
+      kepala_bidang_4: struktur ? struktur.kepala_bidang_4 : '',
+      kepala_bidang_5: struktur ? struktur.kepala_bidang_5 : '',
+      kepala_divisi_1: struktur ? struktur.kepala_divisi_1 : '',
+      kepala_divisi_2: struktur ? struktur.kepala_divisi_2 : ''
     };
   },
   methods: {
@@ -30463,15 +30464,12 @@ var _hoisted_10 = ["value"];
 var _hoisted_11 = {
   "class": "px-4 py-5 sm:p-0 mt-2 relative"
 };
-
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+var _hoisted_12 = {
+  key: 0,
   src: "/svg/diagram-organisasi.svg",
   alt: "diagram",
   "class": "absolute z-0"
-}, null, -1
-/* HOISTED */
-);
-
+};
 var _hoisted_13 = {
   "class": "m-5 z-20 block"
 };
@@ -30552,7 +30550,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* UNKEYED_FRAGMENT */
       ))], 32
       /* HYDRATE_EVENTS */
-      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.ketua_umum), 1
+      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_ctx.struktur ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", _hoisted_12)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.ketua_umum), 1
       /* TEXT */
       )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.sekertaris), 1
       /* TEXT */

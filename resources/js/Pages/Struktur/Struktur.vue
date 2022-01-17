@@ -30,7 +30,7 @@
                         </select>
                     </div>
                     <div class="px-4 py-5 sm:p-0 mt-2 relative">
-                        <img src="/svg/diagram-organisasi.svg" alt="diagram" class="absolute z-0">
+                        <img src="/svg/diagram-organisasi.svg" alt="diagram" class="absolute z-0" v-if="struktur">
                         <div class="m-5 z-20 block">
                             <div class="grid grid-cols-8 gap-4 justify-items-center">
                                 <div class="col-span-2 col-start-4 mt-10">
@@ -98,17 +98,18 @@ export default defineComponent({
     },
 
     data() {
+        const struktur = this.struktur || false;
         return {
-            ketua_umum: this.struktur.ketua_umum || '',
-            bendahara: this.struktur.bendahara || '',
-            sekertaris: this.struktur.sekertaris || '',
-            kepala_bidang_1: this.struktur.kepala_bidang_1 || '',
-            kepala_bidang_2: this.struktur.kepala_bidang_2 || '',
-            kepala_bidang_3: this.struktur.kepala_bidang_3 || '',
-            kepala_bidang_4: this.struktur.kepala_bidang_4 || '',
-            kepala_bidang_5: this.struktur.kepala_bidang_5 || '',
-            kepala_divisi_1: this.struktur.kepala_divisi_1 || '',
-            kepala_divisi_2: this.struktur.kepala_divisi_2 || '',
+            ketua_umum: struktur ? struktur.ketua_umum : '',
+            bendahara: struktur ? struktur.bendahara : '',
+            sekertaris: struktur ? struktur.sekertaris : '',
+            kepala_bidang_1: struktur ? struktur.kepala_bidang_1 : '',
+            kepala_bidang_2: struktur ? struktur.kepala_bidang_2 : '',
+            kepala_bidang_3: struktur ? struktur.kepala_bidang_3 : '',
+            kepala_bidang_4: struktur ? struktur.kepala_bidang_4 : '',
+            kepala_bidang_5: struktur ? struktur.kepala_bidang_5 : '',
+            kepala_divisi_1: struktur ? struktur.kepala_divisi_1 : '',
+            kepala_divisi_2: struktur ? struktur.kepala_divisi_2 : '',
         }
     },
 
