@@ -39,7 +39,7 @@ Route::get('artikel/{post:slug}', [PostsController::class, 'single'])->name('art
 Route::get('sebaran-gunung', [MapsController::class, 'show'])->name('sebaran-gunung');
 Route::get('sebaran-gunung/{id}', [MapsController::class, 'single'])->name('sebaran-gunung');
 
-Route::get('tentang-kami', [MapsController::class, 'show'])->name('tentang-kami');
+Route::get('tentang-kami', [AboutUsController::class, 'show'])->name('tentang-kami');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('dashboard', function () {

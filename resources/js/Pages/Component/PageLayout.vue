@@ -37,7 +37,7 @@
                     </div>
                     <ul class="flex items-center hidden space-x-8 lg:flex">
                         <li>
-                            <nav-link :class="textColor">Tentang Kami</nav-link>
+                            <nav-link :href="route('tentang-kami')" :class="textColor">Tentang Kami</nav-link>
                         </li>
                         <li>
                             <nav-link :class="textColor">Hubungi Kami</nav-link>

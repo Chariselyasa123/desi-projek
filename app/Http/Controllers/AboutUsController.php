@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AboutUs;
+use Facade\Ignition\Http\Middleware\IgnitionEnabled;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -44,7 +45,7 @@ class AboutUsController extends Controller
 
     public function show(AboutUs $aboutUs)
     {
-        //
+        return Inertia::render('TentangKami');
     }
 
     public function edit(AboutUs $aboutUs)

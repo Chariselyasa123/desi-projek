@@ -1,7 +1,6 @@
 <template>
     <page-layout title="Pendaftaran Anggota">
 
-        <!-- Landing page content -->
         <!-- Make content center div -->
         <div class="flex flex-col h-screen">
             <div class="m-auto flex flex-col items-center">
