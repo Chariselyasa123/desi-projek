@@ -29,43 +29,92 @@
                             </option>
                         </select>
                     </div>
-                    <div class="px-4 py-5 sm:p-0 mt-2 relative">
-                        <img src="/svg/diagram-organisasi.svg" alt="diagram" class="absolute z-0" v-if="struktur">
+                    <div class="px-4 py-5 sm:p-0 mt-2">
                         <div class="m-5 z-20 block">
                             <div class="grid grid-cols-8 gap-4 justify-items-center">
-                                <div class="col-span-2 col-start-4 mt-10">
-                                    {{ ketua_umum }}
+                                <div class="col-span-2 col-start-4">
+                                    <div class="card w-auto mx-auto bg-white shadow-xl hover:shadow rounded">
+                                        <img class="w-20 h-20 mx-auto rounded-full border-8 border-white"
+                                             :src="'images/' + gambar_ketua_umum" alt="Gambar Ketua Umum">
+                                        <div class="text-center mt-2 text-xl font-bold">Ketua Umum</div>
+                                        <div class="text-center font-normal text-lg">{{ ketua_umum }}</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="grid grid-cols-8 gap-4 justify-items-center">
-                                <div class="col-start-4 mt-28 pt-2 mr-4">
-                                    {{ sekertaris }}
+                            <div class="grid grid-cols-8 gap-4 justify-items-center mt-4">
+                                <div class="col-start-4">
+                                    <div class="card w-auto mx-auto bg-white shadow-xl hover:shadow rounded">
+                                        <img class="w-20 h-20 mx-auto rounded-full border-8 border-white"
+                                             :src="'images/' + gambar_sekertaris" alt="Gambar Ketua Umum">
+                                        <div class="text-center mt-2 text-xl font-bold">Ketua Umum</div>
+                                        <div class="text-center font-normal text-lg">{{ sekertaris }}</div>
+                                    </div>
                                 </div>
-                                <div class="col-start-5 mt-28 pt-2 ml-8">
-                                    {{ bendahara }}
+                                <div class="col-start-5">
+                                    <div class="card w-auto mx-auto bg-white shadow-xl hover:shadow rounded">
+                                        <img class="w-20 h-20 mx-auto rounded-full border-8 border-white"
+                                             :src="'images/' + gambar_bendahara" alt="Gambar Bendahara">
+                                        <div class="text-center mt-2 text-xl font-bold">Bendahara</div>
+                                        <div class="text-center font-normal text-lg">{{ bendahara }}</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="grid grid-cols-7 gap-4 justify-items-center pb-3">
-                                <div class="mt-24 pt-1 mr-8">
-                                    {{ kepala_bidang_1 }}
+                            <div class="grid grid-cols-7 gap-4 justify-items-center pb-3 mt-4">
+                                <div>
+                                    <div class="card w-auto mx-auto bg-white shadow-xl hover:shadow rounded">
+                                        <img class="w-20 h-20 mx-auto rounded-full border-8 border-white"
+                                             :src="'images/' + gambar_kepala_bidang_1" alt="Gambar Wakil Ketua Umum">
+                                        <div class="text-center mt-2 text-xl font-bold">Kepala Bidang 1</div>
+                                        <div class="text-center font-normal text-lg">{{ kepala_bidang_1 }}</div>
+                                    </div>
                                 </div>
-                                <div class="mt-24 pt-1 mr-5">
-                                    {{ kepala_bidang_2 }}
+                                <div>
+                                    <div class="card w-auto mx-auto bg-white shadow-xl hover:shadow rounded">
+                                        <img class="w-20 h-20 mx-auto rounded-full border-8 border-white"
+                                             :src="'images/' + gambar_kepala_bidang_2" alt="Gambar Wakil Ketua Umum">
+                                        <div class="text-center mt-2 text-xl font-bold">Kepala Bidang 2</div>
+                                        <div class="text-center font-normal text-lg">{{ kepala_bidang_2 }}</div>
+                                    </div>
                                 </div>
-                                <div class="mt-24 pt-1 mr-3">
-                                    {{ kepala_bidang_3 }}
+                                <div>
+                                    <div class="card w-auto mx-auto bg-white shadow-xl hover:shadow rounded">
+                                        <img class="w-20 h-20 mx-auto rounded-full border-8 border-white"
+                                             :src="'images/' + gambar_kepala_bidang_3" alt="Gambar Wakil Ketua Umum">
+                                        <div class="text-center mt-2 text-xl font-bold">Kepala Bidang 3</div>
+                                        <div class="text-center font-normal text-lg">{{ kepala_bidang_3 }}</div>
+                                    </div>
                                 </div>
-                                <div class="mt-24 pt-1">
-                                    {{ kepala_bidang_4 }}
+                                <div>
+                                    <div class="card w-auto mx-auto bg-white shadow-xl hover:shadow rounded">
+                                        <img class="w-20 h-20 mx-auto rounded-full border-8 border-white"
+                                             :src="'images/' + gambar_kepala_bidang_4" alt="Gambar Wakil Ketua Umum">
+                                        <div class="text-center mt-2 text-xl font-bold">Kepala Bidang 4</div>
+                                        <div class="text-center font-normal text-lg">{{ kepala_bidang_4 }}</div>
+                                    </div>
                                 </div>
-                                <div class="mt-24 pt-1 ml-5">
-                                    {{ kepala_bidang_5 }}
+                                <div>
+                                    <div class="card w-auto mx-auto bg-white shadow-xl hover:shadow rounded">
+                                        <img class="w-20 h-20 mx-auto rounded-full border-8 border-white"
+                                             :src="'images/' + gambar_kepala_bidang_5" alt="Gambar Wakil Ketua Umum">
+                                        <div class="text-center mt-2 text-xl font-bold">Kepala Bidang 5</div>
+                                        <div class="text-center font-normal text-lg">{{ kepala_bidang_5 }}</div>
+                                    </div>
                                 </div>
-                                <div class="mt-24 pt-1 ml-8">
-                                    {{ kepala_divisi_1 }}
+                                <div>
+                                    <div class="card w-auto mx-auto bg-white shadow-xl hover:shadow rounded">
+                                        <img class="w-20 h-20 mx-auto rounded-full border-8 border-white"
+                                             :src="'images/' + gambar_kepala_divisi_1" alt="Gambar Wakil Ketua Umum">
+                                        <div class="text-center mt-2 text-xl font-bold">Kepala Divisi 1</div>
+                                        <div class="text-center font-normal text-lg">{{ kepala_divisi_1 }}</div>
+                                    </div>
                                 </div>
-                                <div class="mt-24 pt-1 ml-10">
-                                    {{ kepala_divisi_2 }}
+                                <div>
+                                    <div class="card w-auto mx-auto bg-white shadow-xl hover:shadow rounded">
+                                        <img class="w-20 h-20 mx-auto rounded-full border-8 border-white"
+                                             :src="'images/' + gambar_kepala_divisi_2" alt="Gambar Wakil Ketua Umum">
+                                        <div class="text-center mt-2 text-xl font-bold">Kepala Divisi 2</div>
+                                        <div class="text-center font-normal text-lg">{{ kepala_divisi_2 }}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -110,6 +159,16 @@ export default defineComponent({
             kepala_bidang_5: struktur ? struktur.kepala_bidang_5 : '',
             kepala_divisi_1: struktur ? struktur.kepala_divisi_1 : '',
             kepala_divisi_2: struktur ? struktur.kepala_divisi_2 : '',
+            gambar_ketua_umum: struktur ? struktur.gambar_ketua_umum : '',
+            gambar_bendahara: struktur ? struktur.gambar_bendahara : '',
+            gambar_sekertaris: struktur ? struktur.gambar_sekertaris : '',
+            gambar_kepala_bidang_1: struktur ? struktur.gambar_kepala_bidang_1 : '',
+            gambar_kepala_bidang_2: struktur ? struktur.gambar_kepala_bidang_2 : '',
+            gambar_kepala_bidang_3: struktur ? struktur.gambar_kepala_bidang_3 : '',
+            gambar_kepala_bidang_4: struktur ? struktur.gambar_kepala_bidang_4 : '',
+            gambar_kepala_bidang_5: struktur ? struktur.gambar_kepala_bidang_5 : '',
+            gambar_kepala_divisi_1: struktur ? struktur.gambar_kepala_divisi_1 : '',
+            gambar_kepala_divisi_2: struktur ? struktur.gambar_kepala_divisi_2 : '',
         }
     },
 

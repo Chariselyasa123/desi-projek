@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="mx-auto lg:max-w-2xl mt-8">
-                    <div v-html="post.post_content"></div>
+                    <div class="ck-content" v-html="post.post_content"></div>
                 </div>
             </div>
         </div>

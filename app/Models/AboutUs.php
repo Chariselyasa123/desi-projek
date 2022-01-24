@@ -28,5 +28,15 @@ class AboutUs extends Model
         'kepala_divisi_1',
         'kepala_divisi_2',
         'periode_menjabat',
+        'gambar_ketua_umum',
+        'gambar_sekertaris',
+        'gambar_bendahara',
+        'gambar_kepala_bidang_1',
+        'gambar_kepala_bidang_2',
+        'gambar_kepala_bidang_3',
+        'gambar_kepala_bidang_4',
+        'gambar_kepala_bidang_5',
+        'gambar_kepala_divisi_1',
+        'gambar_kepala_divisi_2',
     ];
 }

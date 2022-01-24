@@ -101,7 +101,6 @@ class PostsController extends Controller
             'postTitle'      => 'required|string|max:255',
             'postContent'    => 'required',
             'postCategories' => 'required|array|min:1|max:3',
-            'postImage'      => 'required|url|max:255',
         ]);
 
         if ($request->slug !== $post->slug) {

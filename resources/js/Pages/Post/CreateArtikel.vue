@@ -18,7 +18,8 @@
                     </div>
                     <!-- Card Body -->
                     <div>
-                        <ckeditor :editor="editor" v-model="form.postContent" :config="editorConfig"></ckeditor>
+                        <ckeditor :editor="editor" @ready="onReady" v-model="form.postContent"
+                                  :config="editorConfig"></ckeditor>
                     </div>
                 </div>
             </div>
@@ -37,7 +38,7 @@ import JetButton from '@/Jetstream/Button.vue'
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import CKEditor from '@ckeditor/ckeditor5-vue';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import DocumentEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import Options from "@/Pages/Post/Partials/Options";
 import axios from 'axios'
 
@@ -55,10 +56,10 @@ export default defineComponent({
 
     data() {
         return {
-            editor: ClassicEditor,
+            editor: DocumentEditor,
             form: this.$inertia.form({
                 postTitle: '',
-                postContent: '',
+                postContent: '</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>',
                 slug: '',
                 postImage: '',
                 postCategories: [],
@@ -66,7 +67,7 @@ export default defineComponent({
             editorConfig: {
                 ckfinder: {
                     uploadUrl: `${this.route('upload.image')}?_token=${document.querySelector('meta[name="csrf-token"]').getAttribute('content')}`,
-                }
+                },
             },
             slug: '',
             image: null,
@@ -85,6 +86,14 @@ export default defineComponent({
                     this.errorAlert()
                 }
             })
+        },
+
+        onReady(editor) {
+            // Insert the toolbar before the editable area.
+            editor.ui.getEditableElement().parentElement.insertBefore(
+                editor.ui.view.toolbar.element,
+                editor.ui.getEditableElement()
+            );
         },
 
         successAlert() {

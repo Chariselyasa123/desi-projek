@@ -17,7 +17,8 @@
                     </div>
                     <!-- Card Body -->
                     <div class="px-4 py-5 sm:p-0 mt-2">
-                        <ckeditor :editor="editor" v-model="form.postContent" :config="editorConfig"></ckeditor>
+                        <ckeditor :editor="editor" @ready="onReady" v-model="form.postContent"
+                                  :config="editorConfig"></ckeditor>
                     </div>
                 </div>
             </div>
@@ -36,7 +37,7 @@ import JetButton from '@/Jetstream/Button.vue'
 import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import CKEditor from '@ckeditor/ckeditor5-vue';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import DocumentEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import Options from "@/Pages/Post/Partials/Options";
 import axios from "axios";
 
@@ -55,7 +56,7 @@ export default defineComponent({
 
     data() {
         return {
-            editor: ClassicEditor,
+            editor: DocumentEditor,
             form: this.$inertia.form({
                 postTitle: this.post.post_title,
                 postContent: this.post.post_content,
@@ -137,6 +138,14 @@ export default defineComponent({
 
         categoriesSelected(selectedCategories) {
             this.form.postCategories = selectedCategories;
+        },
+
+        onReady(editor) {
+            // Insert the toolbar before the editable area.
+            editor.ui.getEditableElement().parentElement.insertBefore(
+                editor.ui.view.toolbar.element,
+                editor.ui.getEditableElement()
+            );
         },
     }
 })

@@ -28,7 +28,7 @@
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
-        "@ckeditor/ckeditor5-build-classic": "^31.1.0",
+        "@ckeditor/ckeditor5-build-decoupled-document": "^31.1.0",
         "@ckeditor/ckeditor5-vue": "^2.0.1",
         "ckeditor5-custom-build": "file:ckeditor5",
         "vue-sweetalert2": "^5.0.2",

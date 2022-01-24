@@ -17,6 +17,15 @@
                                     <jet-label for="ketua_umum" value="Ketua Umum"/>
                                     <jet-input id="ketua_umum" type="text" class="mt-1 block w-full"
                                                v-model="form.ketua_umum" required autofocus/>
+                                    <div class="flex">
+                                        <jet-input id="gambar_ketua_umum" type="file" class="mt-1 block w-full"
+                                                   @change="gambarKetuaUmum" required/>
+                                        <img
+                                            v-if="gambar_ketua_umum"
+                                            :src="gambar_ketua_umum"
+                                            class="h-40 w-40"
+                                            alt="foto ketua umum">
+                                    </div>
                                     <jet-input-error :message="form.errors.ketua_umum" class="mt-2"/>
                                 </div>
 
@@ -24,6 +33,15 @@
                                     <jet-label for="sekertaris" value="Sekertaris"/>
                                     <jet-input id="sekertaris" type="text" class="mt-1 block w-full"
                                                v-model="form.sekertaris" required/>
+                                    <div class="flex">
+                                        <jet-input id="gambar_sekertaris" type="file" class="mt-1 block w-full"
+                                                   @change="gambarSekertaris" required/>
+                                        <img
+                                            v-if="gambar_sekertaris"
+                                            :src="gambar_sekertaris"
+                                            class="h-40 w-40"
+                                            alt="foto ketua umum">
+                                    </div>
                                     <jet-input-error :message="form.errors.sekertaris" class="mt-2"/>
                                 </div>
 
@@ -32,6 +50,15 @@
                                     <jet-input id="bendahara" type="text" class="mt-1 block w-full"
                                                v-model="form.bendahara" required
                                     />
+                                    <div class="flex">
+                                        <jet-input id="gambar_bendahara" type="file" class="mt-1 block w-full"
+                                                   @change="gambarBendahara" required/>
+                                        <img
+                                            v-if="gambar_bendahara"
+                                            :src="gambar_bendahara"
+                                            class="h-40 w-40"
+                                            alt="foto ketua umum">
+                                    </div>
                                     <jet-input-error :message="form.errors.bendahara" class="mt-2"/>
                                 </div>
 
@@ -40,6 +67,15 @@
                                     <jet-input id="kepala_bidang_1" type="text" class="mt-1 block w-full"
                                                v-model="form.kepala_bidang_1" required
                                     />
+                                    <div class="flex">
+                                        <jet-input id="gambar_kepala_bidang_1" type="file" class="mt-1 block w-full"
+                                                   @change="gambarKepalaBidang1" required/>
+                                        <img
+                                            v-if="gambar_kepala_bidang_1"
+                                            :src="gambar_kepala_bidang_1"
+                                            class="h-40 w-40"
+                                            alt="foto ketua umum">
+                                    </div>
                                     <jet-input-error :message="form.errors.kepala_bidang_1" class="mt-2"/>
                                 </div>
 
@@ -48,6 +84,15 @@
                                     <jet-input id="kepala_bidang_2" type="text" class="mt-1 block w-full"
                                                v-model="form.kepala_bidang_2" required
                                     />
+                                    <div class="flex">
+                                        <jet-input id="gambar_kepala_bidang_2" type="file" class="mt-1 block w-full"
+                                                   @change="gambarKepalaBidang2" required/>
+                                        <img
+                                            v-if="gambar_kepala_bidang_2"
+                                            :src="gambar_kepala_bidang_2"
+                                            class="h-40 w-40"
+                                            alt="foto ketua umum">
+                                    </div>
                                     <jet-input-error :message="form.errors.kepala_bidang_2" class="mt-2"/>
                                 </div>
                             </div>
@@ -57,6 +102,15 @@
                                     <jet-input id="kepala_bidang_3" type="text" class="mt-1 block w-full"
                                                v-model="form.kepala_bidang_3" required
                                     />
+                                    <div class="flex">
+                                        <jet-input id="gambar_kepala_bidang_3" type="file" class="mt-1 block w-full"
+                                                   @change="gambarKepalaBidang3" required/>
+                                        <img
+                                            v-if="gambar_kepala_bidang_3"
+                                            :src="gambar_kepala_bidang_3"
+                                            class="h-40 w-40"
+                                            alt="foto ketua umum">
+                                    </div>
                                     <jet-input-error :message="form.errors.kepala_bidang_3" class="mt-2"/>
                                 </div>
 
@@ -65,6 +119,15 @@
                                     <jet-input id="kepala_bidang_4" type="text" class="mt-1 block w-full"
                                                v-model="form.kepala_bidang_4" required
                                     />
+                                    <div class="flex">
+                                        <jet-input id="gambar_kepala_bidang_4" type="file" class="mt-1 block w-full"
+                                                   @change="gambarKepalaBidang4" required/>
+                                        <img
+                                            v-if="gambar_kepala_bidang_4"
+                                            :src="gambar_kepala_bidang_4"
+                                            class="h-40 w-40"
+                                            alt="foto ketua umum">
+                                    </div>
                                     <jet-input-error :message="form.errors.kepala_bidang_4" class="mt-2"/>
                                 </div>
 
@@ -73,6 +136,15 @@
                                     <jet-input id="kepala_bidang_5" type="text" class="mt-1 block w-full"
                                                v-model="form.kepala_bidang_5" required
                                     />
+                                    <div class="flex">
+                                        <jet-input id="gambar_kepala_bidang_5" type="file" class="mt-1 block w-full"
+                                                   @change="gambarKepalaBidang5" required/>
+                                        <img
+                                            v-if="gambar_kepala_bidang_5"
+                                            :src="gambar_kepala_bidang_5"
+                                            class="h-40 w-40"
+                                            alt="foto ketua umum">
+                                    </div>
                                     <jet-input-error :message="form.errors.kepala_bidang_5" class="mt-2"/>
                                 </div>
 
@@ -81,6 +153,15 @@
                                     <jet-input id="kepala_divisi_1" type="text" class="mt-1 block w-full"
                                                v-model="form.kepala_divisi_1" required
                                     />
+                                    <div class="flex">
+                                        <jet-input id="gambar_kepala_divisi_1" type="file" class="mt-1 block w-full"
+                                                   @change="gambarKepalaDivisi1" required/>
+                                        <img
+                                            v-if="gambar_kepala_divisi_1"
+                                            :src="gambar_kepala_divisi_1"
+                                            class="h-40 w-40"
+                                            alt="foto ketua umum">
+                                    </div>
                                     <jet-input-error :message="form.errors.kepala_divisi_1" class="mt-2"/>
                                 </div>
 
@@ -89,6 +170,15 @@
                                     <jet-input id="kepala_divisi_2" type="text" class="mt-1 block w-full"
                                                v-model="form.kepala_divisi_2" required
                                     />
+                                    <div class="flex">
+                                        <jet-input id="gambar_kepala_divisi_2" type="file" class="mt-1 block w-full"
+                                                   @change="gambarKepalaDivisi2" required/>
+                                        <img
+                                            v-if="gambar_kepala_divisi_2"
+                                            :src="gambar_kepala_divisi_2"
+                                            class="h-40 w-40"
+                                            alt="foto ketua umum">
+                                    </div>
                                     <jet-input-error :message="form.errors.kepala_divisi_2" class="mt-2"/>
                                 </div>
 
@@ -145,7 +235,27 @@ export default defineComponent({
                 kepala_divisi_1: '',
                 kepala_divisi_2: '',
                 periode_menjabat: '',
-            })
+                gambar_ketua_umum: '',
+                gambar_sekertaris: '',
+                gambar_bendahara: '',
+                gambar_kepala_bidang_1: '',
+                gambar_kepala_bidang_2: '',
+                gambar_kepala_bidang_3: '',
+                gambar_kepala_bidang_4: '',
+                gambar_kepala_bidang_5: '',
+                gambar_kepala_divisi_1: '',
+                gambar_kepala_divisi_2: '',
+            }),
+            gambar_ketua_umum: '',
+            gambar_sekertaris: '',
+            gambar_bendahara: '',
+            gambar_kepala_bidang_1: '',
+            gambar_kepala_bidang_2: '',
+            gambar_kepala_bidang_3: '',
+            gambar_kepala_bidang_4: '',
+            gambar_kepala_bidang_5: '',
+            gambar_kepala_divisi_1: '',
+            gambar_kepala_divisi_2: '',
         }
     },
 
@@ -173,6 +283,67 @@ export default defineComponent({
                 animation: true,
                 title: this.$page.props.flash.message
             });
+        },
+
+        gambarKetuaUmum(e) {
+            const file = e.target.files[0];
+            this.gambar_ketua_umum = URL.createObjectURL(file);
+            this.form.gambar_ketua_umum = file;
+        },
+
+        gambarSekertaris(e) {
+            const file = e.target.files[0];
+            this.gambar_sekertaris = URL.createObjectURL(file);
+            this.form.gambar_sekertaris = file;
+        },
+
+        gambarBendahara(e) {
+            const file = e.target.files[0];
+            this.gambar_bendahara = URL.createObjectURL(file);
+            this.form.gambar_bendahara = file;
+        },
+
+        gambarKepalaBidang1(e) {
+            const file = e.target.files[0];
+            this.gambar_kepala_bidang_1 = URL.createObjectURL(file);
+            this.form.gambar_kepala_bidang_1 = file;
+        },
+
+        gambarKepalaBidang2(e) {
+            const file = e.target.files[0];
+            this.gambar_kepala_bidang_2 = URL.createObjectURL(file);
+            this.form.gambar_kepala_bidang_2 = file;
+        },
+
+        gambarKepalaBidang3(e) {
+            const file = e.target.files[0];
+            this.gambar_kepala_bidang_3 = URL.createObjectURL(file);
+            this.form.gambar_kepala_bidang_3 = file;
+        },
+
+
+        gambarKepalaBidang4(e) {
+            const file = e.target.files[0];
+            this.gambar_kepala_bidang_4 = URL.createObjectURL(file);
+            this.form.gambar_kepala_bidang_4 = file;
+        },
+
+        gambarKepalaBidang5(e) {
+            const file = e.target.files[0];
+            this.gambar_kepala_bidang_5 = URL.createObjectURL(file);
+            this.form.gambar_kepala_bidang_5 = file;
+        },
+
+        gambarKepalaDivisi1(e) {
+            const file = e.target.files[0];
+            this.gambar_kepala_divisi_1 = URL.createObjectURL(file);
+            this.form.gambar_kepala_divisi_1 = file;
+        },
+
+        gambarKepalaDivisi2(e) {
+            const file = e.target.files[0];
+            this.gambar_kepala_divisi_2 = URL.createObjectURL(file);
+            this.form.gambar_kepala_divisi_2 = file;
         },
     }
 
