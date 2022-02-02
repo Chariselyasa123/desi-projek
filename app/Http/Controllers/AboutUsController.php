@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactUs;
 use App\Models\AboutUs;
 use Facade\Ignition\Http\Middleware\IgnitionEnabled;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
 class AboutUsController extends Controller
@@ -131,5 +133,23 @@ class AboutUsController extends Controller
     public function getData($periode_menjabat)
     {
         return AboutUs::where('periode_menjabat', $periode_menjabat)->first();
+    }
+
+    public function contactUs()
+    {
+        return Inertia::render('ContactUs');
+    }
+
+    public function sendEmail(Request $request)
+    {
+        $this->validate($request, [
+            'name'    => 'required',
+            'email'   => 'required|email',
+            'message' => 'required',
+        ]);
+
+        Mail::to('ripala.tng@gmail.com')->send(new ContactUs($request->message));
+
+        return redirect()->route('contact-us')->with('message', 'Pesan berhasil dikirim');
     }
 }

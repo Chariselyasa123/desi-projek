@@ -42,6 +42,9 @@ Route::get('sebaran-gunung/{id}', [MapsController::class, 'single'])->name('seba
 Route::get('tentang-kami', [AboutUsController::class, 'show'])->name('tentang-kami');
 Route::get('struktur', [AboutUsController::class, 'struktur'])->name('struktur');
 
+Route::get('contact-us', [AboutUsController::class, 'contactUs'])->name('contact-us');
+Route::post('send-email', [AboutUsController::class, 'sendEmail'])->name('send-email');
+
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('Dashboard');
