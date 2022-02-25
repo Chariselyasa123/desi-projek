@@ -99,4 +99,20 @@ class MapsController extends Controller
             'map' => $map->first(),
         ]);
     }
+
+    public function getAllMountains()
+    {
+        return response()->json(['message' => 'success', 'data' => Map::all('id', 'nama_gunung')]);
+    }
+
+    public function updateMountainData(Request $request)
+    {
+        $map = Map::whereId($request->id)->update([
+            'status_gunung'    => $request->status_gunung,
+            'status_pendakian' => $request->status_pendakian,
+            'cuaca'            => $request->cuaca,
+        ]);
+
+        return response()->json(['message' => 'success', 'data' => $map]);
+    }
 }
