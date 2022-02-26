@@ -28,7 +28,7 @@
                         </p>
                     </article>
                 
-                    <Link :href="route('struktur')" class="text-white bg-gray-800 rounded-full px-8 py-3 mt-4 float-right">Aku adalah Link</Link>
+                    <Link :href="route('struktur')" class="text-white bg-gray-800 rounded-full px-8 py-3 mt-4 float-right">Struktur Organisasi</Link>
 
                 </div>
             </div>

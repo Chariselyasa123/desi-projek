@@ -68,7 +68,7 @@ class AboutUsController extends Controller {
         $request->gambar_kepala_bidang_5->move( public_path( 'images' ), $gambarKepalaBidang5 );
         $request->gambar_kepala_divisi_1->move( public_path( 'images' ), $gambarKepalaDivisi1 );
         $request->gambar_kepala_divisi_2->move( public_path( 'images' ), $gambarKepalaDivisi2 );
-
+        
         AboutUs::create( [
             'ketua_umum'             => $request->ketua_umum,
             'sekertaris'             => $request->sekertaris,

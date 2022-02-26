@@ -38,7 +38,7 @@
                                     <img class="w-20 h-20 mx-auto rounded-full border-8 border-white"
                                          :src="'images/' + strukturOrganisasi.gambar_sekertaris"
                                          alt="Gambar Ketua Umum">
-                                    <div class="text-center mt-2 text-xl font-bold">Ketua Umum</div>
+                                    <div class="text-center mt-2 text-xl font-bold">Sekretaris</div>
                                     <div class="text-center font-normal text-lg">{{
                                             strukturOrganisasi.sekertaris
                                         }}

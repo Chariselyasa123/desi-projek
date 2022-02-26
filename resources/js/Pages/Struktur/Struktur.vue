@@ -36,7 +36,7 @@
                                     <div class="card w-auto mx-auto bg-white shadow-xl hover:shadow rounded">
                                         <img class="w-20 h-20 mx-auto rounded-full border-8 border-white"
                                              :src="'images/' + gambar_ketua_umum" alt="Gambar Ketua Umum">
-                                        <div class="text-center mt-2 text-xl font-bold">Ketua Umum</div>
+                                        <div class="text-center mt-2 text-xl font-bold">Sekretaris</div>
                                         <div class="text-center font-normal text-lg">{{ ketua_umum }}</div>
                                     </div>
                                 </div>
@@ -46,7 +46,7 @@
                                     <div class="card w-auto mx-auto bg-white shadow-xl hover:shadow rounded">
                                         <img class="w-20 h-20 mx-auto rounded-full border-8 border-white"
                                              :src="'images/' + gambar_sekertaris" alt="Gambar Ketua Umum">
-                                        <div class="text-center mt-2 text-xl font-bold">Ketua Umum</div>
+                                        <div class="text-center mt-2 text-xl font-bold">Sekretaris</div>
                                         <div class="text-center font-normal text-lg">{{ sekertaris }}</div>
                                     </div>
                                 </div>
