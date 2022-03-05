@@ -6,7 +6,7 @@
             <div class="m-auto flex flex-col items-center w-full md:w-9/12">
 
                 <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full">
-                    <h1 class="text-3xl font-bold px-6">Detail gunung</h1>
+                    <h1 class="text-3xl font-bold px-6">Info gunung</h1>
 
                     <table class="mt-6">
                         <tr>
