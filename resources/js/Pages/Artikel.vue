@@ -1,6 +1,6 @@
 <template>
     <page-layout title="Artikel">
-        <div class="px-4 py-14 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        <div :class="artikelConstainer">
 
             <div class="grid gap-8 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
                 <search-bar placeholder="Cari Artikel" @search="search" class="col-span-3" :searchArtikel="true"/>
@@ -64,6 +64,12 @@ export default defineComponent({
         search(search) {
             this.$inertia.get(this.route('artikel', {search: search}))
         },
-    }
+    },
+
+    computed: {
+        artikelConstainer() {
+            return this.posts.length > 3 ? 'px-4 py-14 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 h-full' : 'px-4 py-14 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 h-screen'
+        },
+    },
 })
 </script>

@@ -75,5 +75,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('struktur-organisasi', [AboutUsController::class, 'index'])->name('struktur-organisasi');
     Route::get('struktur-organisasi/create', [AboutUsController::class, 'create'])->name('struktur-organisasi.create');
     Route::post('struktur-organisasi/store', [AboutUsController::class, 'store'])->name('struktur-organisasi.store');
-    Route::get('struktur-organisasi/{periode_menjabat}', [AboutUsController::class, 'getData'])->name('struktur-organisasi.periode');
+    Route::get('struktur-organisasi/{aboutUs}/edit', [AboutUsController::class, 'edit'])->name('struktur-organisasi.edit');
+    Route::post('struktur-organisasi/{aboutUs}', [AboutUsController::class, 'update'])->name('struktur-organisasi.update');
+    Route::get('struktur-organisasi/{id}', [AboutUsController::class, 'getData'])->name('struktur-organisasi.periode');
 });

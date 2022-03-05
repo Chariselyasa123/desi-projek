@@ -2,7 +2,7 @@
     <page-layout title="Pendaftaran Anggota">
 
         <!-- Make content center div -->
-        <div class="flex flex-col h-screen">
+        <div class="flex flex-col h-full">
             <div class="m-auto flex flex-col items-center">
 
                 <!--Card Form-->

@@ -2,7 +2,7 @@
     <page-layout title="Info Gunung">
 
         <!-- Make content center div -->
-        <div class="flex flex-col h-screen">
+        <div class="flex flex-col h-full">
             <div class="m-auto flex flex-col items-center w-full md:w-9/12">
 
                 <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full">

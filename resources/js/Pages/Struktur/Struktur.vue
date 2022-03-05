@@ -23,11 +23,15 @@
                         <span>Periode Menjabat</span>
                         <select name="periode" id="periode" @change="getData($event)"
                                 class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full max-w-2xl">
-                            <option v-for="perionde in periode" :value="perionde">{{
-                                    perionde
+                            <option v-for="perionde in periode" :value="perionde.id">{{
+                                    perionde.periode
                                 }}
                             </option>
                         </select>
+                        <Link :href="route('struktur-organisasi.edit', {id: id})"
+                              class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
+                            Edit
+                        </Link>
                     </div>
                     <div class="px-4 py-5 sm:p-0 mt-2">
                         <div class="m-5 z-20 block">
@@ -36,7 +40,7 @@
                                     <div class="card w-auto mx-auto bg-white shadow-xl hover:shadow rounded">
                                         <img class="w-20 h-20 mx-auto rounded-full border-8 border-white"
                                              :src="'images/' + gambar_ketua_umum" alt="Gambar Ketua Umum">
-                                        <div class="text-center mt-2 text-xl font-bold">Sekretaris</div>
+                                        <div class="text-center mt-2 text-xl font-bold">Ketua Umum</div>
                                         <div class="text-center font-normal text-lg">{{ ketua_umum }}</div>
                                     </div>
                                 </div>
@@ -149,6 +153,7 @@ export default defineComponent({
     data() {
         const struktur = this.struktur || false;
         return {
+            id: struktur.id,
             ketua_umum: struktur ? struktur.ketua_umum : '',
             bendahara: struktur ? struktur.bendahara : '',
             sekertaris: struktur ? struktur.sekertaris : '',
@@ -174,6 +179,7 @@ export default defineComponent({
 
     methods: {
         getData(event) {
+            this.id = event.target.value;
             axios.get('struktur-organisasi/' + event.target.value).then(res => {
                 this.ketua_umum = res.data.ketua_umum;
                 this.bendahara = res.data.bendahara;
@@ -185,6 +191,16 @@ export default defineComponent({
                 this.kepala_bidang_5 = res.data.kepala_bidang_5;
                 this.kepala_divisi_1 = res.data.kepala_divisi_1;
                 this.kepala_divisi_2 = res.data.kepala_divisi_2;
+                this.gambar_ketua_umum = res.data.gambar_ketua_umum;
+                this.gambar_bendahara = res.data.gambar_bendahara;
+                this.gambar_sekertaris = res.data.gambar_sekertaris;
+                this.gambar_kepala_bidang_1 = res.data.gambar_kepala_bidang_1;
+                this.gambar_kepala_bidang_2 = res.data.gambar_kepala_bidang_2;
+                this.gambar_kepala_bidang_3 = res.data.gambar_kepala_bidang_3;
+                this.gambar_kepala_bidang_4 = res.data.gambar_kepala_bidang_4;
+                this.gambar_kepala_bidang_5 = res.data.gambar_kepala_bidang_5;
+                this.gambar_kepala_divisi_1 = res.data.gambar_kepala_divisi_1;
+                this.gambar_kepala_divisi_2 = res.data.gambar_kepala_divisi_2;
             })
         }
     },
