@@ -7,15 +7,6 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
-    public function index()
-    {
-        //
-    }
-
-    public function create()
-    {
-        //
-    }
 
     public function store(Request $request)
     {
@@ -25,26 +16,6 @@ class CategoriesController extends Controller
 
         Category::create($request->all());
 
-        return redirect()->route('artikel.create')->with('message', 'Kategori berhasil ditambahkan');
-    }
-
-    public function show(Category $category)
-    {
-        //
-    }
-
-    public function edit(Category $category)
-    {
-        //
-    }
-
-    public function update(Request $request, Category $category)
-    {
-        //
-    }
-
-    public function destroy(Category $category)
-    {
-        //
+        return redirect()->route('post.create')->with('message', 'Kategori berhasil ditambahkan');
     }
 }

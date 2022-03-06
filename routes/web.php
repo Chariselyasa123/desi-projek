@@ -34,6 +34,7 @@ Route::get('pendaftaran-anggota', [MembersController::class, 'index'])->name('pe
 Route::post('pendaftaran-anggota', [MembersController::class, 'store'])->name('pendaftaran-anggota.store');
 
 Route::get('artikel', [PostsController::class, 'show'])->name('artikel');
+Route::get('artikel/{category}', [PostsController::class, 'category'])->name('artikel.category');
 Route::get('artikel/{post:slug}', [PostsController::class, 'single'])->name('artikel.single');
 
 Route::get('sebaran-gunung', [MapsController::class, 'show'])->name('sebaran-gunung');

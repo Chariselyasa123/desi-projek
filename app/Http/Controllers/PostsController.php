@@ -166,4 +166,31 @@ class PostsController extends Controller
             'post' => $newPost,
         ]);
     }
+
+    public function category($category)
+    {
+        $posts = Post::whereHas('categories', function ($query) use ($category) {
+            $query->where('slug', $category);
+        })->with('categories')->latest()->paginate(6)->through(function ($post) {
+            return [
+                'post_title'     => $post->post_title,
+                'featured_image' => $post->featured_image,
+                'slug'           => $post->slug,
+                'excerpt'        => $post->excerpt,
+                'human_date'     => $post->created_at->diffForHumans(),
+                'date'           => $post->created_at->format('d M Y'),
+                'diff_date'      => $post->created_at->diffInDays(),
+                'categories'     => $post->categories->map(function ($category) {
+                    return [
+                        'category_name' => $category->name,
+                        'slug'          => $category->slug,
+                    ];
+                })
+            ];
+        });
+
+        return Inertia::render('ArtikelCategory', [
+            'posts' => $posts,
+        ]);
+    }
 }
