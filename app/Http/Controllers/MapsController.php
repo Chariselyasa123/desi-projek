@@ -110,8 +110,13 @@ class MapsController extends Controller
 
     public function single(Map $map)
     {
+        $dataGunung = $map->first();
+
         return Inertia::render('Gunung', [
-            'map' => $map->first(),
+            'map'        => $dataGunung,
+            'human_date' => $dataGunung->updated_at->diffForHumans(),
+            'date'       => $dataGunung->updated_at->format('d M Y'),
+            'diff_date'  => $dataGunung->updated_at->diffInDays(),
         ]);
     }
 

@@ -6,7 +6,10 @@
             <div class="m-auto flex flex-col items-center w-full md:w-9/12">
 
                 <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full">
-                    <h1 class="text-3xl font-bold px-6">Info gunung</h1>
+                    <h1 class="text-3xl font-bold px-6">Info gunung
+                        <span class="text-gray-600 text-sm" v-if="diff_date <= 7">— Updated {{ human_date }}</span>
+                        <span class="text-gray-600 text-sm" v-else>— Updated {{ date }}</span>
+                    </h1>
 
                     <table class="mt-6">
                         <tr>
@@ -79,7 +82,7 @@ import PageLayout from "@/Pages/Component/PageLayout";
 
 export default defineComponent({
 
-    props: ['map'],
+    props: ['map', 'human_date', 'diff_date', 'date'],
 
     components: {
         PageLayout,
