@@ -54,6 +54,10 @@
                                                     class="header-table">
                                                     Biaya Simaksi
                                                 </th>
+                                                <th scope="col"
+                                                    class="header-table">
+                                                    Update Terakhir
+                                                </th>
                                                 <th scope="col" class="relative px-6 py-3">
                                                     <span class="sr-only">Edit</span>
                                                 </th>
@@ -93,6 +97,11 @@
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     Rp. {{ numberFormat(parseInt(map.biaya_simaksi), 0, ',', '.') }}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <span class="text-gray-600"
+                                                          v-if="map.diff_date <= 7">{{ map.human_date }}</span>
+                                                    <span class="text-gray-600" v-else>— {{ map.date }}</span>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     <button class="text-indigo-600 hover:text-indigo-900"

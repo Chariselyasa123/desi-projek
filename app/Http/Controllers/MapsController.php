@@ -11,7 +11,22 @@ class MapsController extends Controller
     public function index()
     {
         return Inertia::render('Maps/Maps', [
-            'maps' => Map::all(),
+            'maps' => Map::all()->map(function ($map) {
+                return [
+                    'id'               => $map->id,
+                    'nama_gunung'      => $map->nama_gunung,
+                    'status_gunung'    => $map->status_gunung,
+                    'jenis_gunung'     => $map->jenis_gunung,
+                    'tinggi'           => $map->tinggi,
+                    'luas'             => $map->luas,
+                    'status_pendakian' => $map->status_pendakian,
+                    'cuaca'            => $map->cuaca,
+                    'biaya_simaksi'    => $map->biaya_simaksi,
+                    'human_date'       => $map->updated_at->diffForHumans(),
+                    'date'             => $map->updated_at->format('d M Y'),
+                    'diff_date'        => $map->updated_at->diffInDays()
+                ];
+            }),
         ]);
     }
 
