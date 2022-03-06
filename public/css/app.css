@@ -1205,14 +1205,14 @@ select {
 .h-full {
   height: 100%;
 }
+.h-screen {
+  height: 100vh;
+}
 .h-32 {
   height: 8rem;
 }
 .h-56 {
   height: 14rem;
-}
-.h-screen {
-  height: 100vh;
 }
 .h-2\/5 {
   height: 40%;
