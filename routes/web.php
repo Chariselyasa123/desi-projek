@@ -38,7 +38,7 @@ Route::get('artikel/category/{category}', [PostsController::class, 'category'])-
 Route::get('artikel/{post:slug}', [PostsController::class, 'single'])->name('artikel.single');
 
 Route::get('sebaran-gunung', [MapsController::class, 'show'])->name('sebaran-gunung');
-Route::get('sebaran-gunung/{id}', [MapsController::class, 'single'])->name('sebaran-gunung');
+Route::get('sebaran-gunung/{map}', [MapsController::class, 'single'])->name('sebaran-gunung');
 
 Route::get('tentang-kami', [AboutUsController::class, 'show'])->name('tentang-kami');
 Route::get('struktur', [AboutUsController::class, 'struktur'])->name('struktur');
@@ -60,6 +60,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('post/createSlug', [PostsController::class, 'createSlug'])->name('post.createSlug');
 
     Route::get('anggota', [MembersController::class, 'show'])->name('anggota');
+    Route::get('anggota/{member}', [MembersController::class, 'edit'])->name('anggota.edit');
     Route::delete('anggota/{member}', [MembersController::class, 'destroy'])->name('anggota.delete');
 
     Route::post('upload/image', [ImageUploadController::class, 'imageUploadPost'])->name('upload.image');

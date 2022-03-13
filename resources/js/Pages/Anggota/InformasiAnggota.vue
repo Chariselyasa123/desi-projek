@@ -77,7 +77,9 @@
                                                     {{ member.status }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                    <button class="text-indigo-600 hover:text-indigo-900">
+                                                    <button class="text-indigo-600 hover:text-indigo-900"
+                                                            @click="editAnggota(member.id)"
+                                                    >
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
                                                              viewBox="0 0 20 20"
                                                              fill="currentColor">
@@ -139,6 +141,10 @@ export default defineComponent({
     },
 
     methods: {
+
+        editAnggota(id) {
+            this.$inertia.get(this.route(''))
+        },
 
         delete(id) {
             this.$inertia.delete(this.route('anggota.delete', {id}))

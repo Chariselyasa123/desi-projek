@@ -77,7 +77,9 @@ class MembersController extends Controller
 
     public function edit(Member $member)
     {
-        //
+        return Inertia::render('Anggota/EditAnggota', [
+            'member' => $member,
+        ]);
     }
 
     public function update(Request $request, Member $member)
