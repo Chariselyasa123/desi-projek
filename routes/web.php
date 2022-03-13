@@ -69,7 +69,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('data-maps', [MapsController::class, 'index'])->name('data-maps');
     Route::get('data-maps/create', [MapsController::class, 'create'])->name('data-maps.create');
-    Route::get('data-maps/{id}/edit', [MapsController::class, 'edit'])->name('data-maps.edit');
+    Route::get('data-maps/{map}/edit', [MapsController::class, 'edit'])->name('data-maps.edit');
     Route::post('data-maps/store', [MapsController::class, 'store'])->name('data-maps.store');
     Route::patch('data-maps/{map:id}', [MapsController::class, 'update'])->name('data-maps.update');
     Route::delete('data-maps/{map:id}', [MapsController::class, 'destroy'])->name('data-maps.delete');

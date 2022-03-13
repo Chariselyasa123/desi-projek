@@ -71,7 +71,7 @@ class MapsController extends Controller
     public function edit(Map $map)
     {
         return Inertia::render('Maps/EditMapsData', [
-            'map' => $map->first(),
+            'map' => $map,
         ]);
     }
 
